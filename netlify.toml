@@ -12,3 +12,7 @@
   from = "https://events.lndo.io/*"
   to = "https://lando.dev/events/:splat"
   status = 301
+[[redirects]]
+  from = "https://events.lando.dev/*"
+  to = "https://lando.dev/events/:splat"
+  status = 301
