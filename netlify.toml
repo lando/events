@@ -13,7 +13,7 @@
   to = "https://lando.dev/events/:splat"
   status = 301
 [[redirects]]
-  from = "/"
-  to = "https://lando.dev/events/"
+  from = "/*"
+  to = "https://lando.dev/events/:splat"
   status = 301
   force = true
