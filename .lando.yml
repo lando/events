@@ -1,0 +1,30 @@
+name: lando-events
+env_file:
+  - lando.env
+excludes:
+  - node_modules
+proxy:
+  cli:
+    - events.lndo.site:8012
+services:
+  cli:
+    type: node:14
+    build:
+      - yarn install
+    scanner: false
+    ssl: true
+    sslExpose: false
+    overrides:
+      ports:
+        - '8012:8012'
+tooling:
+  build:
+    service: cli
+    cmd: yarn dev
+    description: Launch the events listing
+  node:
+    service: cli
+  vuepress:
+    service: cli
+  yarn:
+    service: cli
