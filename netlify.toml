@@ -15,5 +15,5 @@
 [[redirects]]
   from = "https://events.lando.dev/*"
   to = "https://lando.dev/events/:splat"
-  status = 200
+  status = 301
   force = true
