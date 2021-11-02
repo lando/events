@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 
 module.exports = {
+  base: '/events/',
   title: 'Lando Events and Meetups',
   description: 'A list of liberating events and meetups.',
   configureWebpack: config => {

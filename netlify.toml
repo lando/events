@@ -2,13 +2,3 @@
   base = "./"
   publish = "_site"
   command = "yarn build"
-
-# Domain redirects
-[[redirects]]
-  from = "https://events.devwithlando.io/*"
-  to = "https://lando.dev/events/:splat"
-  status = 301
-[[redirects]]
-  from = "https://events.lndo.io/*"
-  to = "https://lando.dev/events/:splat"
-  status = 301
