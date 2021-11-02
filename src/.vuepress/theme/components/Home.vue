@@ -48,11 +48,12 @@
         <Newsletter />
       </div>
       <div class="footer">
+        <a target="_blank" href="https://lando.dev">main site</a> |
         <a target="_blank" href="https://twitter.com/devwithlando">follow us</a> |
         <a target="_blank" href="https://github.com/lando/lando">github</a> |
         <a target="_blank" href="https://docs.lando.dev">docs</a> |
         <a target="_blank" href="https://lando.dev">why lando?</a> |
-        <a target="_blank" href="https://blog.lando.dev">blog</a> |
+        <a target="_blank" href="https://lando.dev/blog">blog</a> |
         <a target="_blank" href="https://lando.dev/sponsor">sponsor</a> |
         <a target="_blank" href="https://docs.lando.dev/contrib/contributing.html">contribute</a> |
         <a target="_blank" href="https://docs.lando.dev/contrib/team.html">evangelists</a> |
