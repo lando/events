@@ -12,7 +12,7 @@
 
     <div class="event-presenter">
       featuring <a :href="presenterLink" target="_blank">{{ presenter }}</a>
-      <a :href="presenterLink" target="_blank"><img :src="presenterPic" :alt="presenter" /></a>
+      <a :href="presenterLink" target="_blank"><img :src="presenterPic" :alt="presenter" loading="lazy" /></a>
     </div>
     <div class="event-link">
       <a :href="link" target="_blank">Click for event details</a>
