@@ -71,8 +71,8 @@
 
 <script>
 import dayjs from 'dayjs';
-import Map from '@theme/components/Map.vue';
-import EventCard from '@theme/components/EventCard.vue';
+import Map from '@theme/Map.vue';
+import EventCard from '@theme/EventCard.vue';
 import {gmapApi} from 'vue2-google-maps';
 
 export default {
@@ -169,171 +169,181 @@ export default {
 };
 </script>
 
-<style lang="stylus">
-.overlay
-  .logo
-    position absolute
-    top 1em
-    left 1em
-    width: 50px
-    display: inline
-  .newsletter-wrapper-mobile,
-  .listing-member-mobile
-    display none
-  .title
-    position absolute
-    bottom 2em
-    left 1em
-    width: 50px
-    h1
-      font-size 4.44em
-      line-height 1em
-  .listing-filters
-    position absolute
-    right 1em
-    top 2em
-    background $landoGrey
-    opacity .75
-    padding .3em 2em
-    overflow scroll
-    color white
-    text-align center
-    a
-      color #efefef
-    a:hover
-      text-decoration underline
-  .listing,
-  .no-events,
-  .newsletter-wrapper,
-  .listing-loading,
-  .listing-member
-    position absolute
-    right 1em
-    top 4em
-    width 350px
-    background white
-    opacity .75
-    height 80%
-    overflow scroll
-  .no-events
-    height auto
-    text-align center
-    .no-events-block
-      padding 2em 4em
-  .newsletter-wrapper
-    height auto
-  .listing-loading
-    height 350px
-  .footer
-    position absolute
-    bottom 0
-    background $landoGrey
-    opacity .75
-    padding .3em 2em
-    overflow scroll
-    color white
-    text-align center
-    a
-      color darken(white, 30%)
-    a:hover
-      text-decoration underline
-    .copyright
-      padding-left 3em
-      font-size .7em
-    .policies
-      font-size .7em
-    a.special-link
-      color white
-      font-weight 600
-
-@keyframes cycle-colors {
-  0% { border-color: $landoPink }
-  25% { border-color: $landoPink }
-  50% { border-color: $landoPink }
-  75% { border-color: $landoPink }
-  100% { border-color: $landoPink }
+<style lang="scss">
+@import '../styles/main.scss';
+.overlay {
+  margin: auto;
+  padding: 2em;
+  .logo {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    width: 50px;
+    display: inline;
+  }
+  .title {
+    position: absolute;
+    bottom: 2em;
+    left: 1em;
+    width: 50px;
+    h1 {
+      font-size: 4.44em;
+      line-height: 1em;
+      font-size: 3em;
+    }
+  }
+  .listing-filters {
+    position: absolute;
+    right: 1em;
+    top: 2em;
+    background: $landoGrey;
+    opacity: 0.75;
+    padding: 0.3em 2em;
+    overflow: scroll;
+    color: #fff;
+    text-align: center;
+    a {
+      color: #efefef;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .no-events {
+    height: auto;
+    text-align: center;
+    .no-events-block {
+      padding: 2em 4em;
+    }
+  }
+  .newsletter-wrapper {
+    height: auto;
+  }
+  .listing-loading {
+    height: 350px;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    background: $landoGrey;
+    opacity: 0.75;
+    padding: 0.3em 2em;
+    overflow: scroll;
+    color: #fff;
+    text-align: center;
+    font-size: 0.9em;
+    padding-top: 2em;
+    a {
+      color: #b3b3b3;
+      &:hover {
+        text-decoration: underline;
+      }
+      &.special-link {
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+    .copyright {
+      padding-left: 3em;
+      font-size: 0.7em;
+      display: block;
+      padding: 0;
+      color: $landoGrey;
+    }
+    .policies {
+      font-size: 0.7em;
+    }
+  }
+}
+.overlay .newsletter-wrapper-mobile,
+.overlay .listing-member-mobile {
+  display: none;
+}
+.overlay .listing,
+.overlay .no-events,
+.overlay .newsletter-wrapper,
+.overlay .listing-loading,
+.overlay .listing-member {
+  position: absolute;
+  right: 1em;
+  top: 4em;
+  width: 350px;
+  background: #fff;
+  opacity: 0.75;
+  height: 80%;
+  overflow: scroll;
+}
+.throb::before,
+.throb::after {
+  animation: pulse 2s linear infinite;
+  border: #fff solid 8px;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  content: ' ';
+  height: 140%;
+  left: -20%;
+  opacity: 0.6;
+  position: absolute;
+  top: -20%;
+  transform: scale(0.714);
+  width: 140%;
+  z-index: 1;
+  animation: pulse 2s linear infinite, cycle-colors 9s linear infinite;
+}
+.throb {
+  &::after {
+    animation-delay: 1s;
+  }
+}
+.avatar {
+  &::after {
+    animation-delay: 0.5s;
+  }
+}
+.home {
+  padding: 0;
+  margin: 0px auto;
+  display: block;
+  height: 100vh;
+  overflow: hidden;
 }
 
-@keyframes pulse {
-  to {
-    opacity: 0;
-    transform: scale(.1);
+@media (max-width: $MQMapless) {
+  .home {
+    overflow: auto;
   }
 }
 
-.throb::before,
-.throb::after
-  animation pulse 2s linear infinite
-  border #fff solid 8px
-  border-radius 9999px
-  box-sizing border-box
-  content ' '
-  height 140%
-  left -20%
-  opacity .6
-  position absolute
-  top -20%
-  transform scale(0.714)
-  width 140%
-  z-index 1
-
-.throb::after
-  animation-delay 1s
-
-.throb::before,
-.throb::after
-  animation pulse 2s linear infinite, cycle-colors 9s linear infinite
-
-.avatar::after
-  animation-delay .5s
-
-.home
-  padding 0
-  margin 0px auto
-  display block
-  height 100vh
-  overflow hidden
-
-@media (max-width: $MQMapless)
-  .home
-    overflow auto
-  .overlay
-    margin: auto
-    padding 2em
-    .logo,
-    .title,
-    .listing,
-    .no-events,
-    .listing-filters,
-    .footer
-      position relative
-      width 90%
-      padding 0
-      opacity 1
-      display block
-      top 0
-      left 0
-    .title
-      h1
-        font-size 3em
-    .newsletter-wrapper,
-    .listing-loading,
-    .listing-member
-      display none
-    .newsletter-wrapper-mobile,
-    .listing-member-mobile
-      display block
-      border-bottom 1px dashed #ddd
-    .listing-filters,
-    .footer
-      background white
-      a
-        color $landoBlue
-    .footer
-      font-size .9em
-      padding-top 2em
-      .copyright
-        display block
-        padding 0
-        color $landoGrey
+.overlay .logo,
+  .overlay .title,
+  .overlay .listing,
+  .overlay .no-events,
+  .overlay .listing-filters,
+  .overlay .footer {
+  position: relative;
+  width: 90%;
+  padding: 0;
+  opacity: 1;
+  display: block;
+  top: 0;
+  left: 0;
+}
+.overlay .newsletter-wrapper,
+  .overlay .listing-loading,
+  .overlay .listing-member {
+  display: none;
+}
+.overlay .newsletter-wrapper-mobile,
+  .overlay .listing-member-mobile {
+  display: block;
+  border-bottom: 1px dashed #ddd;
+}
+.overlay .listing-filters,
+  .overlay .footer {
+  background: #fff;
+}
+.overlay .listing-filters a,
+  .overlay .footer a {
+  color: $landoBlue;
+}
 </style>

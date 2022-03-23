@@ -69,7 +69,7 @@ export default {
   computed: {
     resolvedDate() {
       return dayjs(this.date).format(
-        this.$themeConfig.dateFormat || 'ddd MMM DD YYYY'
+    this.$themeConfig.dateFormat || 'ddd MMM DD YYYY'
       );
     },
     selectedStyle() {
@@ -79,48 +79,62 @@ export default {
 };
 </script>
 
-<style lang="stylus">
-.event-card
-  font-size .85em
-  padding 1rem
-  border-bottom 1px dotted #ddd
-  .event-summary
-    padding-top 1em
-    padding-bottom 1em
-    font-size 1.1em
-    text-color black
-  .event-link
-    padding-top 1em
-  &.event-selected
-    color #fff
-    font-weight 500
-    h2
-      color #fff
-    svg
-      color #fff
-    a
-      color #fff
-      font-weight 700
-    a:hover
-      text-decoration underline
-  h2
-    margin 0
-  img
-    width 24px
-    border-radius 100%
-    float right
-    position relative
-    bottom 6px
-  svg
-    width 14px
-    height 14px
-    color lighten($landoBlue, 50%)
-    position relative
-    top 3px
-    margin-left 3px
-    margin-right 3px
-@media (max-width: $MQMapless)
-  .event-card
-    padding-left 0
-    padding-right 0
+<style lang="scss">
+@import '../styles/main.scss';
+.event-card {
+  font-size: 0.85em;
+  padding: 1rem;
+  border-bottom: 1px dotted #ddd;
+  .event-summary {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-size: 1.1em;
+    text-color: #000;
+  }
+  .event-link {
+    padding-top: 1em;
+  }
+  &.event-selected {
+    color: #fff;
+    font-weight: 500;
+    h2 {
+      color: #fff;
+    }
+    svg {
+      color: #fff;
+    }
+    a {
+      color: #fff;
+      font-weight: 700;
+      &:hover {
+    text-decoration: underline;
+      }
+    }
+  }
+  h2 {
+    margin: 0;
+  }
+  img {
+    width: 24px;
+    border-radius: 100%;
+    float: right;
+    position: relative;
+    bottom: 6px;
+  }
+  svg {
+    width: 14px;
+    height: 14px;
+    color: stugg;
+    position: relative;
+    top: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+}
+@media (max-width: $MQMapless) {
+  .event-card {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 </style>
