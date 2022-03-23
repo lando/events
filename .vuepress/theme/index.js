@@ -1,4 +1,5 @@
 // const debug = require('debug')('@lando/theme-events');
+const {path} = require('@vuepress/utils');
 
 module.exports = (options, app) => {
   return {

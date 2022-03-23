@@ -1,6 +1,6 @@
 <template>
   <main class="home" aria-labelledby="main-title">
-    <Map :markers="markers" v-on:update-marker="highlightEvent" />
+    <!-- <Map :markers="markers" v-on:update-marker="highlightEvent" /> -->
     <div class="overlay">
       <div class="logo">
         <a href="/"><img src="/images/logo-pink-small.png" alt="Lando logo"></a>
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div v-else-if="selector === 'events' && cards.length > 0" class="listing">
-        <div v-for="event in cards" :key="event.id" class="listing-event">
+        <!-- <div v-for="event in cards" :key="event.id" class="listing-event">
           <EventCard
             v-on:update-marker="highlightEvent"
             :selected="event.selected"
@@ -33,7 +33,7 @@
             :presenter-link="event.presenterLink"
             :presenter-pic="event.presenterPic"
           />
-        </div>
+        </div> -->
       </div>
       <div v-else-if="selector === 'events' && cards.length === 0" class="no-events">
         <div class="no-events-block">
@@ -42,10 +42,10 @@
         </div>
       </div>
       <div v-else-if="selector === 'newsletter'" class="newsletter-wrapper">
-        <Newsletter />
+        <!-- <Newsletter /> -->
       </div>
       <div class="newsletter-wrapper-mobile">
-        <Newsletter />
+        <!-- <Newsletter /> -->
       </div>
       <div class="footer">
         <a target="_blank" href="https://lando.dev">main site</a> |
@@ -73,11 +73,10 @@
 import dayjs from 'dayjs';
 import Map from '@theme/Map.vue';
 import EventCard from '@theme/EventCard.vue';
-import {gmapApi} from 'vue2-google-maps';
+import {GoogleMap} from 'vue3-google-map';
 
 export default {
   name: 'Home',
-  components: {EventCard, Map},
   data() {
     return {
       markers: [],
@@ -88,14 +87,14 @@ export default {
     };
   },
   computed: {
-    google: gmapApi,
+    // google: GoogleMap.api,
   },
   mounted() {
     // Geocode our events
-    this.events = this.$events;
-    Promise.all(this.events.map(event => this.geocode(event))).then(() => {
-      this.upcoming();
-    });
+    // this.events = this.$events;
+    // Promise.all(this.events.map(event => this.geocode(event))).then(() => {
+    //   this.upcoming();
+    // });
   },
   methods: {
     getIcon(color = 'grey') {
@@ -121,23 +120,23 @@ export default {
           return '#ed3f7a';
       };
     },
-    geocode(event) {
-      return this.$gmaps.get('/geocode/json', {
-        params: {
-          key: process.env.LANDO_GOOGLE_API_KEY,
-          address: event.location,
-        },
-      })
-      .then(result => {
-        if (result.status === 200 && !result.data.error_message) {
-          event.geocode = result.data.results[0];
-          event.lat = event.geocode.geometry.location.lat;
-          event.lng = event.geocode.geometry.location.lng;
-          event.icon = this.getIcon();
-        }
-        return result.status;
-      });
-    },
+    // geocode(event) {
+    //   return this.$gmaps.get('/geocode/json', {
+    //     params: {
+    //       key: process.env.LANDO_GOOGLE_API_KEY,
+    //       address: event.location,
+    //     },
+    //   })
+    //   .then(result => {
+    //     if (result.status === 200 && !result.data.error_message) {
+    //       event.geocode = result.data.results[0];
+    //       event.lat = event.geocode.geometry.location.lat;
+    //       event.lng = event.geocode.geometry.location.lng;
+    //       event.icon = this.getIcon();
+    //     }
+    //     return result.status;
+    //   });
+    // },
     newsletterToggle() {
       this.selector = 'newsletter';
     },

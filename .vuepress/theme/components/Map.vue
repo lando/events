@@ -1,286 +1,277 @@
 <template>
   <div id="map">
     <div class="map">
-      <GmapMap
+      <GoogleMap
         :center="center"
         :zoom="2"
         :options="options"
         :style="fullscreen"
       >
-        <GmapMarker
+        <Marker
           :key="marker.id"
-          @click="$emit('update-marker', marker.id)"
           v-for="marker in markers"
           :icon="marker.icon"
-          :position="google && new google.maps.LatLng(marker.lat, marker.lng)"
         />
-      </GmapMap>
+        <!-- @click="$emit('update-marker', marker.id)" -->
+        <!-- :position="api && new LatLng(marker.lat, marker.lng)"-->
+      </GoogleMap>
     </div>
   </div>
 </template>
 
-<script>
-import {gmapApi} from 'vue2-google-maps';
+<script setup>
+import {reactive} from 'vue';
+import {GoogleMap, Marker} from 'vue3-google-map';
 
-export default {
-  name: 'Map',
-  props: {
-    markers: {
-      type: Array,
-      default: () => ([]),
+const props = defineProps({
+  markers: {
+    type: Array,
+    default: () => ([]),
+  },
+});
+
+// const api = GoogleMap.api;
+// const LatLng = GoogleMap.api.maps.LatLng;
+
+const fullscreen = reactive({width: '100vw', height: '100vh'});
+const center = reactive({center: {lat: 10, lng: 10}});
+const options = reactive({
+  zoomControl: true,
+  mapTypeControl: false,
+  scaleControl: false,
+  streetViewControl: false,
+  rotateControl: false,
+  fullscreenControl: false,
+  disableDefaultUi: false,
+  minZoom: 3,
+  styles: [
+    {
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#f5f5f5',
+        },
+      ],
     },
-  },
-  computed: {
-    google: gmapApi,
-  },
-  data() {
-    return {
-      fullscreen: {
-        width: '100vw',
-        height: '100vh',
-      },
-      center: {
-        lat: 10,
-        lng: 10,
-      },
-      options: {
-       zoomControl: true,
-       mapTypeControl: false,
-       scaleControl: false,
-       streetViewControl: false,
-       rotateControl: false,
-       fullscreenControl: false,
-       disableDefaultUi: false,
-       minZoom: 3,
-       styles: [
+    {
+      elementType: 'labels',
+      stylers: [
         {
-          elementType: 'geometry',
-          stylers: [
-            {
-              color: '#f5f5f5',
-            },
-          ],
+          visibility: 'off',
         },
+      ],
+    },
+    {
+      elementType: 'labels.icon',
+      stylers: [
         {
-          elementType: 'labels',
-          stylers: [
-            {
-              visibility: 'off',
-            },
-          ],
+          visibility: 'off',
         },
+      ],
+    },
+    {
+      elementType: 'labels.text.fill',
+      stylers: [
         {
-          elementType: 'labels.icon',
-          stylers: [
-            {
-              visibility: 'off',
-            },
-          ],
+          color: '#616161',
         },
+      ],
+    },
+    {
+      elementType: 'labels.text.stroke',
+      stylers: [
         {
-          elementType: 'labels.text.fill',
-          stylers: [
-            {
-              color: '#616161',
-            },
-          ],
+          color: '#f5f5f5',
         },
+      ],
+    },
+    {
+      featureType: 'administrative',
+      elementType: 'geometry',
+      stylers: [
         {
-          elementType: 'labels.text.stroke',
-          stylers: [
-            {
-              color: '#f5f5f5',
-            },
-          ],
+          visibility: 'off',
         },
+      ],
+    },
+    {
+      featureType: 'administrative.land_parcel',
+      stylers: [
         {
-          featureType: 'administrative',
-          elementType: 'geometry',
-          stylers: [
-            {
-              visibility: 'off',
-            },
-          ],
+          visibility: 'off',
         },
+      ],
+    },
+    {
+      featureType: 'administrative.land_parcel',
+      elementType: 'labels.text.fill',
+      stylers: [
         {
-          featureType: 'administrative.land_parcel',
-          stylers: [
-            {
-              visibility: 'off',
-            },
-          ],
+          color: '#bdbdbd',
         },
+      ],
+    },
+    {
+      featureType: 'administrative.neighborhood',
+      stylers: [
         {
-          featureType: 'administrative.land_parcel',
-          elementType: 'labels.text.fill',
-          stylers: [
-            {
-              color: '#bdbdbd',
-            },
-          ],
+          visibility: 'off',
         },
+      ],
+    },
+    {
+      featureType: 'poi',
+      stylers: [
         {
-          featureType: 'administrative.neighborhood',
-          stylers: [
-            {
-              visibility: 'off',
-            },
-          ],
+          visibility: 'off',
         },
+      ],
+    },
+    {
+      featureType: 'poi',
+      elementType: 'geometry',
+      stylers: [
         {
-          featureType: 'poi',
-          stylers: [
-            {
-              visibility: 'off',
-            },
-          ],
+          color: '#eeeeee',
         },
+      ],
+    },
+    {
+      featureType: 'poi',
+      elementType: 'labels.text.fill',
+      stylers: [
         {
-          featureType: 'poi',
-          elementType: 'geometry',
-          stylers: [
-            {
-              color: '#eeeeee',
-            },
-          ],
+          color: '#757575',
         },
+      ],
+    },
+    {
+      featureType: 'poi.park',
+      elementType: 'geometry',
+      stylers: [
         {
-          featureType: 'poi',
-          elementType: 'labels.text.fill',
-          stylers: [
-            {
-              color: '#757575',
-            },
-          ],
+          color: '#e5e5e5',
         },
+      ],
+    },
+    {
+      featureType: 'poi.park',
+      elementType: 'labels.text.fill',
+      stylers: [
         {
-          featureType: 'poi.park',
-          elementType: 'geometry',
-          stylers: [
-            {
-              color: '#e5e5e5',
-            },
-          ],
+          color: '#9e9e9e',
         },
+      ],
+    },
+    {
+      featureType: 'road',
+      stylers: [
         {
-          featureType: 'poi.park',
-          elementType: 'labels.text.fill',
-          stylers: [
-            {
-              color: '#9e9e9e',
-            },
-          ],
+          visibility: 'off',
         },
+      ],
+    },
+    {
+      featureType: 'road',
+      elementType: 'geometry',
+      stylers: [
         {
-          featureType: 'road',
-          stylers: [
-            {
-              visibility: 'off',
-            },
-          ],
+          color: '#ffffff',
         },
+      ],
+    },
+    {
+      featureType: 'road',
+      elementType: 'labels.icon',
+      stylers: [
         {
-          featureType: 'road',
-          elementType: 'geometry',
-          stylers: [
-            {
-              color: '#ffffff',
-            },
-          ],
+          visibility: 'off',
         },
+      ],
+    },
+    {
+      featureType: 'road.arterial',
+      elementType: 'labels.text.fill',
+      stylers: [
         {
-          featureType: 'road',
-          elementType: 'labels.icon',
-          stylers: [
-            {
-              visibility: 'off',
-            },
-          ],
+          color: '#757575',
         },
+      ],
+    },
+    {
+      featureType: 'road.highway',
+      elementType: 'geometry',
+      stylers: [
         {
-          featureType: 'road.arterial',
-          elementType: 'labels.text.fill',
-          stylers: [
-            {
-              color: '#757575',
-            },
-          ],
+          color: '#dadada',
         },
+      ],
+    },
+    {
+      featureType: 'road.highway',
+      elementType: 'labels.text.fill',
+      stylers: [
         {
-          featureType: 'road.highway',
-          elementType: 'geometry',
-          stylers: [
-            {
-              color: '#dadada',
-            },
-          ],
+          color: '#616161',
         },
+      ],
+    },
+    {
+      featureType: 'road.local',
+      elementType: 'labels.text.fill',
+      stylers: [
         {
-          featureType: 'road.highway',
-          elementType: 'labels.text.fill',
-          stylers: [
-            {
-              color: '#616161',
-            },
-          ],
+          color: '#9e9e9e',
         },
+      ],
+    },
+    {
+      featureType: 'transit',
+      stylers: [
         {
-          featureType: 'road.local',
-          elementType: 'labels.text.fill',
-          stylers: [
-            {
-              color: '#9e9e9e',
-            },
-          ],
+          visibility: 'off',
         },
+      ],
+    },
+    {
+      featureType: 'transit.line',
+      elementType: 'geometry',
+      stylers: [
         {
-          featureType: 'transit',
-          stylers: [
-            {
-              visibility: 'off',
-            },
-          ],
+          color: '#e5e5e5',
         },
+      ],
+    },
+    {
+      featureType: 'transit.station',
+      elementType: 'geometry',
+      stylers: [
         {
-          featureType: 'transit.line',
-          elementType: 'geometry',
-          stylers: [
-            {
-              color: '#e5e5e5',
-            },
-          ],
+          color: '#eeeeee',
         },
+      ],
+    },
+    {
+      featureType: 'water',
+      elementType: 'geometry',
+      stylers: [
         {
-          featureType: 'transit.station',
-          elementType: 'geometry',
-          stylers: [
-            {
-              color: '#eeeeee',
-            },
-          ],
+          color: '#c9c9c9',
         },
+      ],
+    },
+    {
+      featureType: 'water',
+      elementType: 'labels.text.fill',
+      stylers: [
         {
-          featureType: 'water',
-          elementType: 'geometry',
-          stylers: [
-            {
-              color: '#c9c9c9',
-            },
-          ],
+          color: '#9e9e9e',
         },
-        {
-          featureType: 'water',
-          elementType: 'labels.text.fill',
-          stylers: [
-            {
-              color: '#9e9e9e',
-            },
-          ],
-        },
-      ]},
-    };
-  },
-};
+      ],
+    },
+  ]
+});
+
 </script>
 
 <style lang="scss">

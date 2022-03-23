@@ -2,8 +2,8 @@
   <div :class="{'event-card': true, 'event-selected': selected}" :style="selectedStyle">
     <a href="#" @click="$emit('update-marker', id)"><h2>{{ name }}</h2></a>
     <div class="event-details">
-      at <NavigationIcon /> {{ location }}
-      on <ClockIcon /> {{ resolvedDate }}
+      <!-- at <NavigationIcon /> {{ location }} -->
+      <!-- on <ClockIcon /> {{ resolvedDate }} -->
     </div>
 
     <div class="event-summary">
@@ -22,10 +22,8 @@
 
 <script>
 import dayjs from 'dayjs';
-import {ClockIcon, NavigationIcon} from 'vue-feather-icons';
 
 export default {
-  components: {ClockIcon, NavigationIcon},
   name: 'EventCard',
   props: {
     id: {
@@ -67,11 +65,11 @@ export default {
     },
   },
   computed: {
-    resolvedDate() {
-      return dayjs(this.date).format(
-    this.$themeConfig.dateFormat || 'ddd MMM DD YYYY'
-      );
-    },
+    // resolvedDate() {
+    //   return dayjs(this.date).format(
+    // this.$themeConfig.dateFormat || 'ddd MMM DD YYYY'
+    //   );
+    // },
     selectedStyle() {
       return (this.selected) ? {background: `${this.border}`} : {};
     },
