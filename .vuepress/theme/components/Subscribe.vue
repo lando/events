@@ -82,50 +82,6 @@ export default {
 };
 </script>
 
-<style lang="stylus">
-.subscribe
-  margin: auto
-  width: 90%
-  padding: 2em 0
-  text-align: center
-  h3
-    color: $landoPink
-  &.subscribe-dark
-    background-color: darken($landoBlue, 12%)
-    h3
-      color: lighten($landoBlue, 90%)
-  .button
-    text-transform: uppercase
-    background-color: $landoPink
-    margin: 1em 0
-    font-size: 1.2em
-    font-weight: 500
-    letter-spacing: .05em
-    min-width: 8em
-    text-align: center
-    &:not(:last-child)
-      margin-right: 1%
-    &.disabled
-      opacity: .5
-  .hidden-field
-    visibility: hidden
-  .subscribe-input
-    width: 100%
-    box-sizing: border-box
-    padding: 10px 80px 10px 20px
-    margin-bottom: 1em
-    height: 50px
-    border-radius: 50px
-    border: 1px solid #ccc
-    font-size: 16px
-    background-color: lighten($landoBlue, 96%)
-    &:focus
-      outline: none
-      border-color: lighten($landoPink, 18%)
-    &.disabled
-      opacity: .5
-@media (max-width: $MQMobile)
-  .subscribe
-    .subscribe-input
-      width: 90%
+<style lang="scss">
+@import '../styles/main.scss';
 </style>

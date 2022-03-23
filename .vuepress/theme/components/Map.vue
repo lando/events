@@ -283,8 +283,11 @@ export default {
 };
 </script>
 
-<style lang="stylus">
-@media (max-width: $MQMapless)
-  #map
-    display none
+<style lang="scss">
+@import '../styles/main.scss';
+@media (max-width: $MQMapless) {
+  #map {
+    display: none;
+  }
+}
 </style>
