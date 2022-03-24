@@ -1,10 +1,7 @@
 <template>
   <main class="home" aria-labelledby="main-title">
-    <!-- <Map :markers="markers" v-on:update-marker="highlightEvent" /> -->
+    <Map class="map-fixed" :events="events" v-on:update-marker="highlightEvent" />
     <div class="overlay">
-      <div class="logo">
-        <a href="/"><img src="/images/logo-pink-small.png" alt="Lando logo"></a>
-      </div>
       <div class="title">
         <h1>Lando events and meetups</h1>
       </div>
@@ -48,18 +45,9 @@
         <!-- <Newsletter /> -->
       </div>
       <div class="footer">
-        <a target="_blank" href="https://lando.dev">main site</a> |
-        <a target="_blank" href="https://twitter.com/devwithlando">follow us</a> |
-        <a target="_blank" href="https://github.com/lando/lando">github</a> |
-        <a target="_blank" href="https://docs.lando.dev">docs</a> |
-        <a target="_blank" href="https://lando.dev">why lando?</a> |
-        <a target="_blank" href="https://lando.dev/blog">blog</a> |
-        <a target="_blank" href="https://lando.dev/sponsor">sponsor</a> |
-        <a target="_blank" href="https://docs.lando.dev/contrib/contributing.html">contribute</a> |
-        <a target="_blank" href="https://docs.lando.dev/contrib/team.html">evangelists</a> |
         <a class="special-link" @click="newsletterToggle" href="#">get events updates</a> |
         <a target="_blank" class="special-link" href="https://docs.lando.dev/contrib/evangelist-events.html">add your event</a>
-        <span class="copyright">copyright © 2016-present Tandem | </span>
+        <span class="copyright">copyright © 2022 Lando System </span>
         <span class="policies">
           <a href="/privacy/">privacy policy</a> |
           <a href="/terms/">terms of use</a>
@@ -69,117 +57,117 @@
   </main>
 </template>
 
-<script>
+<script setup>
+import {reactive, ref} from 'vue';
+import {useSiteData} from '@vuepress/client';
 import dayjs from 'dayjs';
+
 import Map from '@theme/Map.vue';
 import EventCard from '@theme/EventCard.vue';
-import {GoogleMap} from 'vue3-google-map';
 
-export default {
-  name: 'Home',
-  data() {
-    return {
-      markers: [],
-      cards: ['loading'],
-      evangelists: [],
-      events: [],
-      selector: 'loading',
-    };
-  },
-  computed: {
-    // google: GoogleMap.api,
-  },
-  mounted() {
-    // Geocode our events
-    // this.events = this.$events;
-    // Promise.all(this.events.map(event => this.geocode(event))).then(() => {
-    //   this.upcoming();
-    // });
-  },
-  methods: {
-    getIcon(color = 'grey') {
-      return {
-        path: this.google.maps.SymbolPath.CIRCLE,
-        scale: 5,
-        fillColor: color,
-        fillOpacity: 1,
-        strokeColor: color,
-      };
-    },
-    getTypeColor(type) {
-      switch (type) {
-        case 'conference':
-          return '#2ecc71';
-        case 'camp':
-          return '#ed3f7a';
-        case 'meetup':
-          return '#ed3f7a';
-        case 'other':
-          return '#ed3f7a';
-        default:
-          return '#ed3f7a';
-      };
-    },
-    // geocode(event) {
-    //   return this.$gmaps.get('/geocode/json', {
-    //     params: {
-    //       key: process.env.LANDO_GOOGLE_API_KEY,
-    //       address: event.location,
-    //     },
-    //   })
-    //   .then(result => {
-    //     if (result.status === 200 && !result.data.error_message) {
-    //       event.geocode = result.data.results[0];
-    //       event.lat = event.geocode.geometry.location.lat;
-    //       event.lng = event.geocode.geometry.location.lng;
-    //       event.icon = this.getIcon();
-    //     }
-    //     return result.status;
-    //   });
-    // },
-    newsletterToggle() {
-      this.selector = 'newsletter';
-    },
-    previous() {
-      this.selector = 'events';
-      this.cards = this.events.filter(event => dayjs(event.date).isBefore(dayjs()));
-      this.markers = this.events.filter(event => dayjs(event.date).isBefore(dayjs()));
-    },
-    upcoming() {
-      this.selector = 'events';
-      this.cards = this.events.filter(event => dayjs(event.date).isAfter(dayjs()));
-      this.markers = this.events.filter(event => dayjs(event.date).isAfter(dayjs()));
-    },
-    highlightEvent(id) {
-      this.markers = this.markers.map(marker => {
-        if (marker.id === id) {
-          marker.icon = this.getIcon(this.getTypeColor(marker.type));
-        } else {
-          marker.icon = this.getIcon();
-        }
-        return marker;
-      });
-      this.cards = this.cards.map(card => {
-        card.selected = card.id === id;
-        return card;
-      });
-    },
-  },
+const data = useSiteData();
+const {events} = data.value;
+
+// reactive
+const markers = reactive([]);
+const cards = reactive(['loading']);
+const selector = ref('loading');
+
+// methods
+const getIcon = (color = 'grey') => ({
+  // path: this.google.maps.SymbolPath.CIRCLE,
+  scale: 5,
+  fillColor: color,
+  fillOpacity: 1,
+  strokeColor: color,
+});
+
+const getTypeColor = type => {
+  switch (type) {
+    case 'conference':
+      return '#2ecc71';
+    case 'camp':
+      return '#ed3f7a';
+    case 'meetup':
+      return '#ed3f7a';
+    case 'other':
+      return '#ed3f7a';
+    default:
+      return '#ed3f7a';
+};
+
+const newsletterToggle = () => {
+  selector.value = 'newsletter';
+};
+
+const previous = () => {
+  selector.value = 'events';
+  cards.value = events.value.filter(event => dayjs(event.date).isBefore(dayjs()));
+  markers.value = events.value.filter(event => dayjs(event.date).isBefore(dayjs()));
+};
+
+const upcoming = () => {
+  selector.value = 'events';
+  cards.value = events.value.filter(event => dayjs(event.date).isAfter(dayjs()));
+  markers.value = events.value.filter(event => dayjs(event.date).isAfter(dayjs()));
+};
+
+const highlightEvent = id => {
+  // this.markers = this.markers.map(marker => {
+  //   if (marker.id === id) {
+  //     marker.icon = this.getIcon(this.getTypeColor(marker.type));
+  //   } else {
+  //     marker.icon = this.getIcon();
+  //   }
+  //   return marker;
+  // });
+  // this.cards = this.cards.map(card => {
+  //   card.selected = card.id === id;
+  //   return card;
+  // });
+}
+
+// computed: {
+  // google: GoogleMap.api,
+// mounted() {
+  // Geocode our events
+  // this.events = this.$events;
+  // Promise.all(this.events.map(event => this.geocode(event))).then(() => {
+  //   this.upcoming();
+  // });
+
+  // geocode(event) {
+  //   return this.$gmaps.get('/geocode/json', {
+  //     params: {
+  //       key: process.env.LANDO_GOOGLE_API_KEY,
+  //       address: event.location,
+  //     },
+  //   })
+  //   .then(result => {
+  //     if (result.status === 200 && !result.data.error_message) {
+  //       event.geocode = result.data.results[0];
+  //       event.lat = event.geocode.geometry.location.lat;
+  //       event.lng = event.geocode.geometry.location.lng;
+  //       event.icon = this.getIcon();
+  //     }
+  //     return result.status;
+  //   });
+  // },
 };
 </script>
 
 <style lang="scss">
 @import '../styles/main.scss';
+.map-fixed {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+}
 .overlay {
   margin: auto;
   padding: 2em;
-  .logo {
-    position: absolute;
-    top: 1em;
-    left: 1em;
-    width: 50px;
-    display: inline;
-  }
   .title {
     position: absolute;
     bottom: 2em;
@@ -194,8 +182,8 @@ export default {
   .listing-filters {
     position: absolute;
     right: 1em;
-    top: 2em;
-    background: $landoGrey;
+    top: 4em;
+    background: var(--c-border);
     opacity: 0.75;
     padding: 0.3em 2em;
     overflow: scroll;
@@ -222,9 +210,13 @@ export default {
     height: 350px;
   }
   .footer {
-    position: absolute;
+    position:absolute;
     bottom: 0;
-    background: $landoGrey;
+    right: 25%;
+    left: 50%;
+    width: 600px;
+    margin-left: -300px;
+    background: var(--c-border);
     opacity: 0.75;
     padding: 0.3em 2em;
     overflow: scroll;
@@ -247,7 +239,7 @@ export default {
       font-size: 0.7em;
       display: block;
       padding: 0;
-      color: $landoGrey;
+      color: var(--c-border);
     }
     .policies {
       font-size: 0.7em;
@@ -313,20 +305,6 @@ export default {
   }
 }
 
-.overlay .logo,
-  .overlay .title,
-  .overlay .listing,
-  .overlay .no-events,
-  .overlay .listing-filters,
-  .overlay .footer {
-  position: relative;
-  width: 90%;
-  padding: 0;
-  opacity: 1;
-  display: block;
-  top: 0;
-  left: 0;
-}
 .overlay .newsletter-wrapper,
   .overlay .listing-loading,
   .overlay .listing-member {
@@ -340,9 +318,5 @@ export default {
 .overlay .listing-filters,
   .overlay .footer {
   background: #fff;
-}
-.overlay .listing-filters a,
-  .overlay .footer a {
-  color: $landoBlue;
 }
 </style>
