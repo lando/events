@@ -12,7 +12,6 @@ If you'd like to report a bug or submit a feature request then please [use the i
 
 We try to log all changes big and small in both [THE CHANGELOG](https://github.com/lando/events/blob/main/CHANGELOG.md) and the [release notes](https://github.com/lando/events/releases).
 
-
 ## Development
 
 * Requires [Lando](https://lando.dev/)

@@ -107,8 +107,7 @@ const getCssValue = (el, property) => {
   background: inherit;
   border-bottom: none;
   display: flex;
-  max-width: var(--total-width);
-  margin: auto;
+  max-width: 100%;
   z-index: 200;
   background-color: rgba(255, 255, 255, 0.60);
   border-radius: 3px;
@@ -117,6 +116,7 @@ const getCssValue = (el, property) => {
   }
   .navbar-interior {
     width: var(--total-width);
+    margin: auto;
     display: flex;
     .navbar-items-wrapper, .navbar-links-right-wrapper {
       position: static;
