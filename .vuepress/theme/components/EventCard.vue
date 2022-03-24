@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'event-card': true, 'active': props.event.active}">
+  <div v-if="props.event.show !== false" :class="{'event-card': true, 'active': props.event.active}">
     <div class="event-card-inner">
       <a :href="`#${anchor}`" @click="$emit('toggle-active', id)">
         <h2 :id="anchor">{{ title }}</h2>
@@ -19,7 +19,7 @@
       </div>
 
       <div class="event-link">
-        <a :href="link" target="_blank">Click for event details</a>
+        <a :href="url" target="_blank">Click for event details</a>
       </div>
     </div>
   </div>
@@ -39,13 +39,14 @@ const props = defineProps({
   },
 });
 
-const {id, anchor, location, link, presenters, title, summary} = props.event;
-const resolvedDate = computed(() => dayjs(props.date).format('ddd MMM DD YYYY'));
+const {id, anchor, location, presenters, timestamp, title, summary, url} = props.event;
+const resolvedDate = computed(() => dayjs(timestamp).format('ddd MMM DD YYYY'));
 </script>
 
 <style lang="scss" scoped>
 @import '../styles/main.scss';
 .event-card {
+  border-radius: 3px;
   font-size: 0.85em;
   padding: 1rem;
   border-bottom: 1px dotted #ddd;
