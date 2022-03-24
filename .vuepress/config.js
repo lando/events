@@ -4,7 +4,14 @@ module.exports = {
   base: '/events/',
   title: 'Lando Events and Meetups',
   description: 'A list of liberating events and meetups.',
-  theme: path.resolve(__dirname, './theme'),
+  bundlerConfig: {
+    viteOptions: {
+      optimizeDeps: {
+        include: [path.resolve(__dirname, 'theme', 'utils.js')],
+      },
+    },
+  },
+  theme: path.resolve(__dirname, 'theme'),
   themeConfig: {
     // PARENT CONFIG
     contributors: false,
