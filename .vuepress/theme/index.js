@@ -47,10 +47,13 @@ module.exports = (options, app) => {
       // Mix in some other helpful things
       for (const event of app.siteData.events) {
         event.anchor = _.kebabCase(event.title);
-        debug('computed anchor %s for event %s', event.anchor, event.id);
-        event.timestamp = dayjs(event.time || event.date).format('x');
-        debug('computed unix ms timestamp %s for event %s', event.timestamp, event.id);
+        event.timestamp = _.toInteger(dayjs(event.time || event.date).format('x'));
+        event.weight = event.timestamp / 100000;
+        debug('computed timestamp=%s weight=%s for %s=anchor ', event.timestamp, event.weight, event.anchor);
       };
+
+      // Sort events by timestamp
+      app.siteData.events = _.orderBy(app.siteData.events, ['timestamp'], ['desc']);
 
       // Go through and geocode
       const geocoder = NodeGeocoder({provider: 'google', apiKey: process.env.VITE_GMAPS_API_KEY}); // eslint-disable-line new-cap
@@ -58,7 +61,7 @@ module.exports = (options, app) => {
         try {
           const response = await geocoder.geocode(event.location);
           event.geo = response[0];
-          event.marker = getMarker(event.geo.latitude, event.geo.longitude);
+          event.marker = getMarker(event.geo.latitude, event.geo.longitude, event);
           debug('geocoded %s to %s %s (%s)', event.location, event.geo.latitude, event.geo.longitude, event.geo.formattedAddress);
         } catch (error) {
           warn(`could not process ${event.location} with error ${error}!`);
