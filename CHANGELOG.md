@@ -1,3 +1,8 @@
+v4.0.0 [March 24, 2021](https://github.com/lando/website/releases/tag/v4.0.0)
+------------------------
+
+* Rebased on new docs framework
+
 v1.0.4 [November 10, 2021](https://github.com/lando/website/releases/tag/v1.0.4)
 ------------------------
 

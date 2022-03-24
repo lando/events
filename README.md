@@ -1,6 +1,6 @@
-# Lando's Events Subsite
+# Lando Events
 
-[lando.dev/events](https://lando.dev/events) [VuePress](https://vuepress.vuejs.org/) Events Subsite repo.
+This repo powers the [Lando events subsite](https://lando.dev/events).
 
 ## Issues, Questions and Support
 
@@ -14,34 +14,46 @@ We try to log all changes big and small in both [THE CHANGELOG](https://github.c
 
 ## Development
 
-* Requires [Lando](https://lando.dev/)
+* Requires [Node 14+](https://nodejs.org/dist/latest-v14.x/)
+* Requires a [Google Maps API key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+* Note that the events data lives in `events.yaml` and you must relaunch the dev server or rebuild the app for changes to reflect.
 * Prefers [Yarn](https://classic.yarnpkg.com/lang/en/docs/install)
+* Alternatively you can also use Lando
 
 ```bash
-git clone https://github.com/lando/events.git && cd events
-yarn install
+git clone https://github.com/lando/blog.git && cd blog
 ```
 
-If you dont' want to install Node 14 or Yarn for whatever reason you can install [Lando](https://docs.lando.dev/basics/installation.html) and use that:
+### Using Node/Yarn
 
 ```bash
-git clone https://github.com/lando/events.git && cd events
-# Install deps and get node
-lando start
+# Install deps
+yarn | npm install
 
-# Run commands
-lando node
-lando yarn
-```
+# Launch dev site
+DEBUG="@lando/*" VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY yarn dev
 
-## Testing
-
-```bash
-# Lint the code
+# Lint
 yarn lint
 
-# Run unit tests
-yarn test
+# Build site
+DEBUG="@lando/*" VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY yarn build
+```
+
+### Using Lando
+
+```bash
+# Install deps
+lando start
+
+# Launch dev site
+VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY lando dev
+
+# Lint
+lando yarn lint
+
+# Build site
+VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY lando yarn build
 ```
 
 ## Releasing
