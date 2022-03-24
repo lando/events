@@ -1,114 +1,54 @@
 <template>
-  <div :class="{'event-card': true, 'event-selected': selected}" :style="selectedStyle">
-    <a href="#" @click="$emit('update-marker', id)"><h2>{{ name }}</h2></a>
-    <div class="event-details">
-      <!-- at <NavigationIcon /> {{ location }} -->
-      <!-- on <ClockIcon /> {{ resolvedDate }} -->
-    </div>
+  <div :class="{'event-card': true, 'active': props.event.active}">
+    <div class="event-card-inner">
+      <a :href="`#${anchor}`" @click="$emit('toggle-active', id)">
+        <h2 :id="anchor">{{ title }}</h2>
+      </a>
 
-    <div class="event-summary">
-      {{ summary }}
-    </div>
+      <div class="event-details">
+        {{ location }} {{ resolvedDate }}
+      </div>
 
-    <div class="event-presenter">
-      featuring <a :href="presenterLink" target="_blank">{{ presenter }}</a>
-      <a :href="presenterLink" target="_blank"><img :src="presenterPic" :alt="presenter" loading="lazy" /></a>
-    </div>
-    <div class="event-link">
-      <a :href="link" target="_blank">Click for event details</a>
+      <div class="event-summary">
+        {{ summary }}
+      </div>
+
+      <div v-for="presenter in presenters" class="event-presenter" :key="presenter.name">
+        featuring <a :href="presenter.link" target="_blank">{{ presenter.name }}</a>
+        <a :href="presenter.link" target="_blank"><img :src="presenter.pic" :alt="presenter.name" loading="lazy" /></a>
+      </div>
+
+      <div class="event-link">
+        <a :href="link" target="_blank">Click for event details</a>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import {computed} from 'vue';
 import dayjs from 'dayjs';
 
-export default {
-  name: 'EventCard',
-  props: {
-    id: {
-      type: String,
-    },
-    border: {
-      type: String,
-    },
-    date: {
-      type: String,
-    },
-    link: {
-      type: String,
-    },
-    location: {
-      type: String,
-    },
-    name: {
-      type: String,
-    },
-    presenter: {
-      type: String,
-      default: 'Team Lando',
-    },
-    presenterPic: {
-      type: String,
-      default: 'https://www.gravatar.com/avatar/db2470075fb67c330c155cab9698826f',
-    },
-    presenterLink: {
-      type: String,
-      default: 'https://twitter.com/devwithlando',
-    },
-    selected: {
-      type: Boolean,
-      default: false,
-    },
-    summary: {
-      type: String,
-    },
+defineEmits(['toggle-active']);
+
+const props = defineProps({
+  event: {
+    type: Object,
+    default: () => ({}),
+    required: true,
   },
-  computed: {
-    // resolvedDate() {
-    //   return dayjs(this.date).format(
-    // this.$themeConfig.dateFormat || 'ddd MMM DD YYYY'
-    //   );
-    // },
-    selectedStyle() {
-      return (this.selected) ? {background: `${this.border}`} : {};
-    },
-  },
-};
+});
+
+const {id, anchor, location, link, presenters, title, summary} = props.event;
+const resolvedDate = computed(() => dayjs(props.date).format('ddd MMM DD YYYY'));
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../styles/main.scss';
 .event-card {
   font-size: 0.85em;
   padding: 1rem;
   border-bottom: 1px dotted #ddd;
-  .event-summary {
-    padding-top: 1em;
-    padding-bottom: 1em;
-    font-size: 1.1em;
-    text-color: #000;
-  }
-  .event-link {
-    padding-top: 1em;
-  }
-  &.event-selected {
-    color: #fff;
-    font-weight: 500;
-    h2 {
-      color: #fff;
-    }
-    svg {
-      color: #fff;
-    }
-    a {
-      color: #fff;
-      font-weight: 700;
-      &:hover {
-    text-decoration: underline;
-      }
-    }
-  }
   h2 {
     margin: 0;
   }
@@ -127,6 +67,33 @@ export default {
     top: 3px;
     margin-left: 3px;
     margin-right: 3px;
+  }
+  &.active {
+    background: rgb(237, 63, 122);
+    color: #fff;
+    font-weight: 500;
+    h2 {
+      color: #fff;
+    }
+    svg {
+      color: #fff;
+    }
+    a {
+      color: #fff;
+      font-weight: 700;
+      &:hover {
+    text-decoration: underline;
+      }
+    }
+  }
+
+  .event-summary {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-size: 1.1em;
+  }
+  .event-link {
+    padding-top: 1em;
   }
 }
 @media (max-width: $MQMapless) {

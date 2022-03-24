@@ -20,12 +20,13 @@
         :zoomControl="true"
       >
         <Marker
+          class="somethang"
+          :visible="event.active !== false"
           :key="event.id"
           v-for="event in props.events"
           :options="event.marker"
+          @click="$emit('toggle-active', event.id)"
         />
-
-
         <!-- @click="$emit('update-marker', marker.id)" -->
       </GoogleMap>
     </div>
@@ -33,8 +34,10 @@
 </template>
 
 <script setup>
-import {reactive, ref, watch} from 'vue';
+import {reactive} from 'vue';
 import {GoogleMap, Marker} from 'vue3-google-map';
+
+defineEmits(['toggle-active']);
 
 const props = defineProps({
   events: {
@@ -42,8 +45,6 @@ const props = defineProps({
     default: () => ([]),
   },
 });
-
-console.log(props.event)
 
 // Map opts
 const apiKey = import.meta.env.VITE_GMAPS_API_KEY;

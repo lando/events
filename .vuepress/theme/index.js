@@ -1,8 +1,13 @@
+const _ = require('lodash');
+const dayjs = require('dayjs');
+const advancedFormat = require('dayjs/plugin/advancedFormat');
 const debug = require('debug')('@lando/theme-events');
 const {error, fs, path, warn} = require('@vuepress/utils');
+const {getMarker} = require('./utils.js');
 const yaml = require('js-yaml');
 
 const NodeGeocoder = require('node-geocoder');
+dayjs.extend(advancedFormat);
 
 module.exports = (options, app) => {
   return {
@@ -38,27 +43,22 @@ module.exports = (options, app) => {
       }
       // Load events from yaml
       app.siteData.events = yaml.load(fs.readFileSync(path.resolve(__dirname, '..', '..', 'events.yaml'), 'utf8'));
+
+      // Mix in some other helpful things
+      for (const event of app.siteData.events) {
+        event.anchor = _.kebabCase(event.title);
+        debug('computed anchor %s for event %s', event.anchor, event.id);
+        event.timestamp = dayjs(event.time || event.date).format('x');
+        debug('computed unix ms timestamp %s for event %s', event.timestamp, event.id);
+      };
+
       // Go through and geocode
-      const geocoder = NodeGeocoder({provider: 'google', apiKey: process.env.VITE_GMAPS_API_KEY});
+      const geocoder = NodeGeocoder({provider: 'google', apiKey: process.env.VITE_GMAPS_API_KEY}); // eslint-disable-line new-cap
       for await (const event of app.siteData.events) {
         try {
           const response = await geocoder.geocode(event.location);
           event.geo = response[0];
-          event.marker = {
-            icon: {
-              anchor: {x: 25, y: 25},
-              path: 'M 25, 50 a 25,25 0 1,1 50,0 a 25,25 0 1,1 -50,0',
-              scale: .33,
-              fillColor: '#df4090',
-              fillOpacity: 1,
-              strokeColor: '#df4090',
-              strokeOpacity: 1,
-            },
-            position: {
-              lat: event.geo.latitude,
-              lng: event.geo.longitude,
-            }
-          };
+          event.marker = getMarker(event.geo.latitude, event.geo.longitude);
           debug('geocoded %s to %s %s (%s)', event.location, event.geo.latitude, event.geo.longitude, event.geo.formattedAddress);
         } catch (error) {
           warn(`could not process ${event.location} with error ${error}!`);
