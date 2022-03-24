@@ -6,20 +6,24 @@
       </a>
 
       <div class="event-details">
-        {{ location }} {{ resolvedDate }}
+        {{ location }} on {{ resolvedDate }}
       </div>
 
       <div class="event-summary">
         {{ summary }}
       </div>
 
-      <div v-for="presenter in presenters" class="event-presenter" :key="presenter.name">
-        featuring <a :href="presenter.link" target="_blank">{{ presenter.name }}</a>
-        <a :href="presenter.link" target="_blank"><img :src="presenter.pic" :alt="presenter.name" loading="lazy" /></a>
+      <div class="event-link">
+        <a :href="url" target="_blank">Read More</a>
       </div>
 
-      <div class="event-link">
-        <a :href="url" target="_blank">Click for event details</a>
+      <div v-for="presenter in presenters" class="event-presenter" :key="presenter.name">
+        <div class="event-presenter-name">
+          <a :href="presenter.link" target="_blank">{{ presenter.name }}</a>
+        </div>
+        <div class="event-presenter-pic">
+          <a :href="presenter.link" target="_blank"><img :src="presenter.pic" :alt="presenter.name" loading="lazy" /></a>
+        </div>
       </div>
     </div>
   </div>
@@ -50,29 +54,28 @@ const resolvedDate = computed(() => dayjs(timestamp).format('ddd MMM DD YYYY'));
   font-size: 0.85em;
   padding: 1rem;
   border-bottom: 1px dotted #ddd;
+  background: rgb(255, 255, 255, .60);
+  margin-bottom: 0.5em;
   h2 {
     margin: 0;
+    border: 0;
+    color: var(--c-text-light);
+    &:hover {
+      text-decoration: none;
+    }
   }
   img {
     width: 24px;
     border-radius: 100%;
-    float: right;
-    position: relative;
-    bottom: 6px;
   }
-  svg {
-    width: 14px;
-    height: 14px;
-    color: stugg;
-    position: relative;
-    top: 3px;
-    margin-left: 3px;
-    margin-right: 3px;
-  }
+
   &.active {
-    background: rgb(237, 63, 122);
+    background: rgb(237, 63, 122, .9);
     color: #fff;
     font-weight: 500;
+    &:hover {
+      text-decoration: none;
+    }
     h2 {
       color: #fff;
     }
@@ -82,19 +85,51 @@ const resolvedDate = computed(() => dayjs(timestamp).format('ddd MMM DD YYYY'));
     a {
       color: #fff;
       font-weight: 700;
-      &:hover {
-    text-decoration: underline;
-      }
     }
   }
-
+  .event-details {
+    color: var(--c-text-quote);
+  }
+  .event-presenter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    a {
+      color: var(--c-text);
+    }
+  }
   .event-summary {
     padding-top: 1em;
     padding-bottom: 1em;
-    font-size: 1.1em;
+    font-size: 1.05em;
+    line-height: 1.4em;
   }
   .event-link {
     padding-top: 1em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+  }
+
+  &.active {
+    background: rgb(237, 63, 122, .9);
+    color: #fff;
+    font-weight: 500;
+    &:hover {
+      text-decoration: none;
+    }
+    .event-details {
+      color: #fff;
+    }
+    h2 {
+      color: #fff;
+    }
+    svg {
+      color: #fff;
+    }
+    a {
+      color: #fff;
+      font-weight: 700;
+    }
   }
 }
 @media (max-width: $MQMapless) {

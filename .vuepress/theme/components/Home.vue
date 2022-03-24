@@ -203,7 +203,6 @@ const toggleTime = () => {
       right: 1em;
       top: 4em;
       width: 350px;
-      background: rgb(255, 255, 255, .60);
       height: 80%;
       overflow: scroll;
       .newsletter__wrap {
@@ -213,6 +212,9 @@ const toggleTime = () => {
           background: var(--c-border);
         }
       }
+    }
+    .no-events {
+      background: rgb(255, 255, 255, .60);
     }
     .newsletter-wrapper {
       position: absolute;
