@@ -9,7 +9,7 @@
       <div class="secondary-nav">
         <a class="special-link" @click="toggleTime" href="#">{{ pastEventsText }}</a> |
         <a class="special-link" :class="{active: showNewsletter}" @click="toggleNewsletter" href="#">get event updates</a> |
-        <a target="_blank" rel="noopener noreferrer" class="special-link" href="https://docs.lando.dev/contrib/evangelist-events.html">add or suggest an event</a>
+        <a target="_blank" rel="noopener noreferrer" class="special-link" href="https://docs.google.com/forms/d/1VgNzd3Ay8TR97DInZzeAnmf2ANn_w4_nlkPZA3dcz10">add or suggest an event</a>
       </div>
 
       <div v-if="showNewsletter" class="newsletter-wrapper">
@@ -31,7 +31,7 @@
         />
         <div class="no-events-block">
           <div>Know of a good upcoming event?</div>
-          <a href="https://docs.lando.dev/contrib/evangelist-events.html">Add or suggest one!</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/1VgNzd3Ay8TR97DInZzeAnmf2ANn_w4_nlkPZA3dcz10">Add or suggest one!</a>
         </div>
       </div>
       <div v-else-if="showEvents && !noUpcoming" class="listing" id="listing">
