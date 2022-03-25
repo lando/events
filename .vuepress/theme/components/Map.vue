@@ -49,7 +49,7 @@ const props = defineProps({
 // Map opts
 const apiKey = import.meta.env.VITE_GMAPS_API_KEY;
 const fullscreen = reactive({width: '100vw', height: '100vh'});
-const center = reactive({lat: 20, lng: 10});
+const center = reactive({lat: 30, lng: 10});
 const styles = reactive([
   {
     elementType: 'geometry',

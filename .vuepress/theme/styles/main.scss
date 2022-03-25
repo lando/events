@@ -1,1 +1,52 @@
 @import '@lando/vuepress-theme-default-plus/styles/main';
+
+// Font loading
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lexend'),
+       url('../../public/fonts/lexend-regular.woff2') format('woff2'),
+       url('../../public/fonts/lexend-regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lexend'),
+       url('../../public/fonts/lexend-700.woff2') format('woff2'),
+       url('../../public/fonts/lexend-700.woff') format('woff');
+}
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: local('Lexend'),
+       url('../../public/fonts/lexend-800.woff2') format('woff2'),
+       url('../../public/fonts/lexend-800.woff') format('woff');
+}
+
+body {
+  font-family: Lexend;
+  color: $landoGrey;
+}
+
+.btn {
+  padding: 0.5rem 2rem;
+  border-radius: 42px;
+  background: var(--c-brand);
+  color: #fff;
+  font-size: 1rem;
+  display: inline-block;
+  line-height: 2rem;
+  height: 2rem;
+  margin: 0;
+}
+.btn-primary {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
