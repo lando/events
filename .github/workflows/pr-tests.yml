@@ -8,6 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       TERM: xterm
+      VITE_GMAPS_API_KEY: ${{ secrets.VITE_GMAPS_API_KEY }}
     strategy:
       matrix:
         os:
