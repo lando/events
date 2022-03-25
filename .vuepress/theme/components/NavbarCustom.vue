@@ -17,7 +17,7 @@
       </div>
 
       <div class="navbar-links-right-wrapper" :style="linksWrapperStyle">
-        <a href="/download/" class="btn btn-primary can-hide">Get Lando!</a>
+        <a href="https://lando.dev/download/" class="btn btn-primary can-hide">Get Lando!</a>
         <ToggleSidebarButtonCustom @toggle="$emit('toggle-sidebar')" />
       </div>
     </div>
@@ -107,10 +107,14 @@ const getCssValue = (el, property) => {
   background: inherit;
   border-bottom: none;
   display: flex;
+  margin: 0;
+  padding-top: 1.25rem;
+  padding-bottom: 1rem;
   max-width: 100%;
   z-index: 200;
-  background-color: rgba(255, 255, 255, 0.60);
-  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.75);
+  font-size: 1.375rem;
+  height: auto;
   .logo {
     margin-right: 3.8125rem;
   }

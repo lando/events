@@ -2,7 +2,7 @@ const {path} = require('@vuepress/utils');
 
 module.exports = {
   base: '/events/',
-  title: 'Lando Events and Meetups',
+  title: 'Lando',
   description: 'A list of liberating events and meetups.',
   bundlerConfig: {
     viteOptions: {
@@ -54,7 +54,7 @@ module.exports = {
     sharedNavbar: [
       {text: 'Blog', link: 'https://lando.dev/blog'},
       {text: 'Events', link: '/'},
-      {text: 'Support', link: 'https://lando.dev/support/'},
+      {text: 'Support', link: 'https://lando.dev/support'},
       {text: 'Docs', link: 'https://docs.lando.dev'},
     ],
     sidebar: false,

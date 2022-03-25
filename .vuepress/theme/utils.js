@@ -1,7 +1,7 @@
 'use strict';
 
 const activeMarkerColor = '#ed3f7a';
-const markerColor = '#767676';
+const markerColor = '#49424E';
 
 exports.getMarker = (lat, lng, options = {}) => ({
   icon: {

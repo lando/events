@@ -3,7 +3,9 @@
     <Map class="map-fixed" :events="events" @toggle-active="setActive" />
     <div class="overlay">
       <div class="title">
-        <h1>Lando events and meetups</h1>
+        <h1>Lando
+          <div class="emphasis">events and meetups</div>
+        </h1>
       </div>
 
       <div class="secondary-nav">
@@ -22,16 +24,18 @@
       </div>
 
       <div v-if="showEvents && noUpcoming" class="no-events">
-        <MailChimp
-          class="newsletter-desktop"
-          action="https://dev.us12.list-manage.com/subscribe/post?u=59874b4d6910fa65e724a4648&amp;id=613837077f"
-          title="No upcoming events!"
-          byline="Check back soon or we can ping you on the emails when there are new events"
-          button="Ping me!"
-        />
-        <div class="no-events-block">
-          <div>Know of a good upcoming event?</div>
-          <a target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/1VgNzd3Ay8TR97DInZzeAnmf2ANn_w4_nlkPZA3dcz10">Add or suggest one!</a>
+        <div class="no-events-inner">
+          <MailChimp
+            class="newsletter-desktop"
+            action="https://dev.us12.list-manage.com/subscribe/post?u=59874b4d6910fa65e724a4648&amp;id=613837077f"
+            title="No upcoming events!"
+            byline="Check back soon or we can ping you on the emails when there are new events"
+            button="Ping me!"
+          />
+          <div class="no-events-new">
+              <div>Know of a good upcoming event?</div>
+              <a target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/1VgNzd3Ay8TR97DInZzeAnmf2ANn_w4_nlkPZA3dcz10">Add or suggest one</a>
+          </div>
         </div>
       </div>
       <div v-else-if="showEvents && !noUpcoming" class="listing" id="listing">
@@ -74,7 +78,7 @@ const AsyncEventCard = defineAsyncComponent({
 
 // Constants
 const activeMarkerColor = '#ed3f7a';
-const markerColor = '#767676';
+const markerColor = '#49424E';
 
 // Events
 const data = useSiteData();
@@ -124,7 +128,7 @@ const setActive = id => {
     router.push({path: '/', hash: `#${event.anchor}`});
     // Scroll
     const dom = document.getElementById(event.anchor);
-    document.getElementById('listing').scrollTo(0, dom.offsetTop - 10);
+    document.getElementById('listing').scrollTo(0, dom.offsetTop - 50);
   }
 };
 
@@ -164,7 +168,7 @@ const toggleTime = () => {
     padding: 0;
     margin: 0;
     display: block;
-    height: calc(100vh - 58px);
+    height: calc(100vh - 84px);
   }
   .page-wrapper-inner {
     width: 100vw;
@@ -196,34 +200,82 @@ const toggleTime = () => {
   .overlay {
     margin: auto;
     padding: 2em;
-    .listing,
-    .no-events {
-      border-radius: 3px;
+    .listing {
+      border-radius: 6px;
       position: absolute;
-      right: 1em;
-      top: 4em;
-      width: 350px;
-      height: 80%;
+      right: 4em;
+      top: 140px;
+      bottom: 50px;
+      width: 466px;
       overflow: scroll;
-      .newsletter__wrap {
-        padding: 0 1em;
-        background: initial;
-        input[type=email] {
-          background: var(--c-border);
+      padding: 2rem;
+    }
+    .no-events {
+      border-radius: 6px;
+      position: absolute;
+      right: 96px;
+      top: 188px;
+      width: 466px;
+      overflow: scroll;
+      box-shadow: 0 14px 40px #49424e24;
+      border-radius: 6px;
+      background: rgb(255, 255, 255, .60);
+      height: auto;
+      text-align: center;
+      padding: 0;
+      font-size: 1.15rem;
+      h3 {
+        margin: 0;
+        font-size: 1.65rem;
+      }
+      .no-events-inner {
+        padding: 2.5rem;
+        line-height: 1.7;
+        color: $landoGrey;;
+        opacity: .86;
+        font-weight: 400;
+        .newsletter {
+          font-size: 1.15rem;
+        }
+        .newsletter__wrap {
+          padding: 0;
+          margin: 0;
+          background: initial;
+          input[type=email] {
+            background: var(--c-border);
+          }
+        }
+        .no-events-new {
+          margin-top: 1em;
+          font-size: .96rem;
+          a {
+            color: var(--c-brand);
+            text-transform: uppercase;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            &:after {
+              content: url(/images/chevron-right.svg);
+              position: relative;
+              display: inline-flex;
+              justify-content: center;
+              background: 0 0;
+              width: 40px;
+              padding: 2px 0;
+            }
+          }
         }
       }
     }
-    .no-events {
-      background: rgb(255, 255, 255, .60);
-    }
     .newsletter-wrapper {
       position: absolute;
-      bottom: 65px;
+      top: 115px;
       right: 25%;
       left: 50%;
       width: 600px;
       margin-left: -300px;
       padding: 0em;
+      z-index: 999999;
       .newsletter__wrap {
         padding: 1em;
       }
@@ -234,19 +286,12 @@ const toggleTime = () => {
       left: 1em;
       width: 50px;
       h1 {
-        font-size: 4.44em;
-        line-height: 1em;
-        font-size: 3em;
-      }
-    }
-    .no-events {
-      height: auto;
-      text-align: center;
-      .no-events-block {
-        border-top: 1px solid var(--c-border);
-        padding: 2em 2em;
-        a {
-          font-weight: 600;
+        color: $landoGrey;
+        font-size: 4rem;
+        font-weight: 800;
+        line-height: 4rem;
+        .emphasis {
+          color: var(--c-brand);
         }
       }
     }
@@ -259,7 +304,7 @@ const toggleTime = () => {
     .secondary-nav {
       border-radius: 3px;
       position:absolute;
-      bottom: 40px;
+      top: 86px;
       right: 25%;
       left: 50%;
       width: 572px;
@@ -368,6 +413,26 @@ const toggleTime = () => {
         left: initial;
         top: initial;
         bottom: initial;
+        padding: 0;
+      }
+      .title {
+        h1 {
+          margin-top: 0;
+        }
+      }
+      .secondary-nav {
+        border-bottom: 1px solid var(--c-border);
+        border-top: 1px solid var(--c-border);
+        padding: 1em 0;
+      }
+      .listing {
+        .listing-event {
+          border-bottom: 1px solid var(--c-border);
+        }
+        .event-card {
+          padding: 1em 0;
+          box-shadow: none;
+        }
       }
       .footer {
         padding-top: 2em;

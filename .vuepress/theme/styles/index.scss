@@ -1,9 +1,15 @@
 @import '@lando/vuepress-theme-default-plus/styles/index';
 
 :root {
-  --c-brand: #dd3f8f;
+  --c-brand: #DD3F8F;
+  --content-width: 942px;
+  --rightbar-width: 260px;
+  --rightbar-margin: 40px;
+  --total-width: calc(var(--content-width) + var(--rightbar-width) + var(--rightbar-margin));
+  --homepage-width: 1000px;
+  --search-border-color: #BDB6C2;
 }
 
 html.dark {
-  --c-brand: #dd3f8f;
+  --c-brand: #DD3F8F;
 }
