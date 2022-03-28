@@ -1,10 +1,5 @@
 <template>
   <footer class="footer">
-    <div class="secondary-nav">
-      <a class="special-link" @click="toggleTime" href="#">{{ pastEventsText }}</a> |
-      <a class="special-link" :class="{active: showNewsletter}" @click="toggleNewsletter" href="#">get event updates</a> |
-      <a target="_blank" rel="noopener noreferrer" class="special-link" href="https://docs.lando.dev/contrib/evangelist-events.html">add or suggest an event</a>
-    </div>
     <SocialLinks
       v-if="social"
       :icons="social"

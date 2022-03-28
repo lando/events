@@ -8,12 +8,17 @@
         {{ location }} on {{ resolvedDate }}
       </div>
 
-      <div v-for="presenter in presenters" class="event-presenter" :key="presenter.name">
-        <div class="event-presenter-name">
-          <a :href="presenter.link" target="_blank">{{ presenter.name }}</a>
+      <div class="event-presenter">
+        <div class="event-presenter-name-wrapper">
+          <span v-for="(presenter, index) in presenters" class="event-presenter-name" :key="presenter.name">
+            <a :href="presenter.link" target="_blank">{{ presenter.name }}</a>
+            <span v-if="index !== presenters.length - 1">, </span>
+          </span>
         </div>
-        <div class="event-presenter-pic">
-          <a :href="presenter.link" target="_blank"><img :src="presenter.pic" :alt="presenter.name" loading="lazy" /></a>
+        <div class="event-presenter-pic-wrapper">
+          <div v-for="presenter in presenters" class="event-presenter-pic" :key="presenter.name">
+            <a :href="presenter.link" target="_blank"><img :src="presenter.pic" :alt="presenter.name" loading="lazy" /></a>
+          </div>
         </div>
       </div>
 
@@ -60,6 +65,7 @@ const resolvedDate = computed(() => dayjs(timestamp).format('ddd MMM DD YYYY'));
     font-size: 2em;
     border: 0;
     margin-top: 0;
+    margin-bottom: 0.3em;
     color: $landoGrey;
     &:hover {
       text-decoration: none;
@@ -96,7 +102,12 @@ const resolvedDate = computed(() => dayjs(timestamp).format('ddd MMM DD YYYY'));
     align-items: center;
     justify-content: space-between;
     a {
-      color: var(--c-text);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .event-presenter-pic-wrapper {
+      display: flex;
     }
   }
   .event-summary {

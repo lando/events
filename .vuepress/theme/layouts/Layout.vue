@@ -4,22 +4,27 @@
       <FooterCta
         heading="What are you waiting for?"
         ctaText="Get Lando Now"
-        ctaLink="https://lando.dev/download"
+        ctaLink="/download"
       />
     </template>
-    <template #footer>
-      <div class="thing"></div>
+    <template #page-bottom>
+      <FooterCustom />
     </template>
   </ParentLayout>
 </template>
 
 <script setup>
-import ParentLayout from '@lando/vuepress-theme-default-plus/layouts/Layout.vue';
-import FooterCta from '../components/FooterCta.vue';
+import ParentLayout from '@vuepress/theme-default/lib/client/layouts/Layout.vue';
+import FooterCustom from '../components/FooterCustom.vue';
 </script>
 
 <style lang="scss">
 @import '../styles/main.scss';
+:not(.events-home) {
+  .footer {
+    position: relative;
+  }
+}
 .page-wrapper-outer {
   padding-top: 2em;
 }

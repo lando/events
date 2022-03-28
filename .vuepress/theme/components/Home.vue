@@ -194,7 +194,6 @@ const toggleTime = () => {
     padding: 0;
     margin: 0px auto;
     display: block;
-    height: 100vh;
     overflow: hidden;
   }
   .overlay {
@@ -302,8 +301,9 @@ const toggleTime = () => {
       height: 350px;
     }
     .secondary-nav {
-      border-radius: 3px;
-      position:absolute;
+      border-radius: 6px;
+      text-transform: uppercase;
+      position: absolute;
       top: 86px;
       right: 25%;
       left: 50%;
@@ -313,10 +313,10 @@ const toggleTime = () => {
       overflow: scroll;
       color: var(--c-text);
       text-align: center;
-      font-size: 0.9em;
+      font-size: 0.8em;
       padding: 1em;
       a {
-        font-weight: 700;
+        font-weight: 500;
         color: var(--c-text-quote);
         &:hover {
           color: var(--c-brand);
