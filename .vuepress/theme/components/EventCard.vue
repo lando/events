@@ -1,7 +1,7 @@
 <template>
   <div v-if="props.event.show !== false" :class="{'event-card': true, 'active': props.event.active}">
     <div class="event-card-inner">
-      <a :href="`#${anchor}`" @click="$emit('toggle-active', id)">
+      <a @click="$emit('toggle-active', id)">
         <h2 :id="anchor">{{ title }}</h2>
       </a>
       <div class="event-details">
@@ -74,6 +74,11 @@ const resolvedDate = computed(() => dayjs(timestamp).format('ddd MMM DD YYYY'));
   img {
     width: 24px;
     border-radius: 100%;
+  }
+  .event-card-inner {
+    a {
+      cursor: pointer;
+    }
   }
 
   &.active {
