@@ -14,8 +14,9 @@
 </template>
 
 <script setup>
-import ParentLayout from '@vuepress/theme-default/lib/client/layouts/Layout.vue';
-import FooterCustom from '../components/FooterCustom.vue';
+import ParentLayout from '@lando/vuepress-theme-default-plus/layouts/Layout.vue';
+import FooterCustom from './../components/FooterCustom.vue';
+import FooterCta from './../components/FooterCta.vue';
 </script>
 
 <style lang="scss">
