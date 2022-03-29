@@ -45,8 +45,11 @@ module.exports = {
       id: '6478338',
     },
     jobs: false,
-    readMode: false,
-    rightbar: false,
+    readMode: {
+      focusName: 'MAKE READING EASIER',
+      distractName: 'MAKE READING HARDER',
+    },
+    rightbar: true,
     robots: {
       allowAll: true,
     },
@@ -113,7 +116,7 @@ module.exports = {
     }],
     sponsors: false,
     tags: false,
-    toc: false,
+    toc: true,
     versionsPage: false,
   },
   head: [

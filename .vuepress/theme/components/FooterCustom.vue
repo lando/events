@@ -85,4 +85,9 @@ const {social} = themeData.value;
     font-size: 0.7em;
   }
 }
+.read-mode {
+  .footer {
+    display: none;
+  }
+}
 </style>

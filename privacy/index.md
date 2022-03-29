@@ -1,6 +1,8 @@
 ---
 title: Privacy Policy
 description: The privacy policies for Lando web properties and Lando as software
+rightbar: true
+toc: true
 ---
 
 # Privacy Policy
