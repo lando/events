@@ -1,7 +1,7 @@
 <template>
   <header ref="navbar" class="navbar">
     <div class="navbar-interior">
-      <span ref="siteBrand">
+      <span class="logo-wrapper" ref="siteBrand">
           <a
             :href="siteBrandLink"
             aria-current="page"
@@ -115,6 +115,9 @@ const getCssValue = (el, property) => {
   background-color: rgba(255, 255, 255, 0.75);
   font-size: 1.375rem;
   height: auto;
+  .logo-wrapper {
+    width: 173px;
+  }
   .logo {
     margin-right: 3.8125rem;
   }
