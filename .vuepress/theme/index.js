@@ -9,10 +9,15 @@ const yaml = require('js-yaml');
 const NodeGeocoder = require('node-geocoder');
 dayjs.extend(advancedFormat);
 
-module.exports = (options, app) => {
+const parentTheme = require('@lando/vuepress-theme-default-plus');
+const {palettePlugin} = require('@vuepress/plugin-palette');
+const {registerComponentsPlugin} = require('@vuepress/plugin-register-components');
+
+
+module.exports = options => {
   return {
-    theme: path.resolve(__dirname, '.'),
-    extends: '@lando/vuepress-theme-default-plus',
+    name: '@lando/events-theme',
+    extends: parentTheme(options),
     alias: {
       '@theme/EventCard.vue': path.resolve(__dirname, 'components', 'EventCard.vue'),
       '@theme/Home.vue': path.resolve(__dirname, 'components', 'Home.vue'),
@@ -21,19 +26,15 @@ module.exports = (options, app) => {
     },
     layouts: path.resolve(__dirname, 'layouts'),
     plugins: [
-      ['@vuepress/plugin-palette',
-        {
-          preset: 'sass',
-          userStyleFile: path.resolve(__dirname, 'styles', 'index.scss'),
-          userPaletteFile: path.resolve(__dirname, 'styles', 'palette.scss'),
-        },
-      ],
-      ['@vuepress/register-components',
-        {
-          componentsDir: path.resolve(__dirname, 'components'),
-          componentsPatterns: ['*.vue', '**/*.vue'],
-        },
-      ],
+      palettePlugin({
+        preset: 'sass',
+        userStyleFile: path.resolve(__dirname, 'styles', 'index.scss'),
+        userPaletteFile: path.resolve(__dirname, 'styles', 'palette.scss'),
+      }),
+      registerComponentsPlugin({
+        componentsDir: path.resolve(__dirname, './components'),
+        componentsPatterns: ['*.vue', '**/*.vue'],
+      }),
     ],
     async onInitialized(app) {
       // Error if we dont have an API key set
