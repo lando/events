@@ -3,16 +3,37 @@ const dayjs = require('dayjs');
 const advancedFormat = require('dayjs/plugin/advancedFormat');
 const debug = require('debug')('@lando/theme-events');
 const {error, fs, path, warn} = require('@vuepress/utils');
-const {getMarker} = require('./utils.js');
 const yaml = require('js-yaml');
 
 const NodeGeocoder = require('node-geocoder');
 dayjs.extend(advancedFormat);
 
-module.exports = (options, app) => {
+const parentTheme = require('@lando/vuepress-theme-default-plus');
+const {palettePlugin} = require('@vuepress/plugin-palette');
+const {registerComponentsPlugin} = require('@vuepress/plugin-register-components');
+
+module.exports = options => {
+  const activeMarkerColor = '#ed3f7a';
+  const markerColor = '#49424E';
+
+  const getMarker = (lat, lng, options = {}) => ({
+    icon: {
+      anchor: {x: 0, y: 0},
+      path: 'M0,10a10,10 0 1,0 20,0a10,10 0 1,0 -20,0',
+      scale: 1,
+      fillColor: options.active ? activeMarkerColor : markerColor,
+      fillOpacity: 1,
+      strokeColor: options.active ? activeMarkerColor : markerColor,
+      strokeOpacity: 1,
+    },
+    position: {lat, lng},
+    visible: options.show !== false,
+    zIndex: options.weight || 0,
+  });
+
   return {
-    theme: path.resolve(__dirname, '.'),
-    extends: '@lando/vuepress-theme-default-plus',
+    name: '@lando/events-theme',
+    extends: parentTheme(options),
     alias: {
       '@theme/EventCard.vue': path.resolve(__dirname, 'components', 'EventCard.vue'),
       '@theme/Home.vue': path.resolve(__dirname, 'components', 'Home.vue'),
@@ -21,19 +42,15 @@ module.exports = (options, app) => {
     },
     layouts: path.resolve(__dirname, 'layouts'),
     plugins: [
-      ['@vuepress/plugin-palette',
-        {
-          preset: 'sass',
-          userStyleFile: path.resolve(__dirname, 'styles', 'index.scss'),
-          userPaletteFile: path.resolve(__dirname, 'styles', 'palette.scss'),
-        },
-      ],
-      ['@vuepress/register-components',
-        {
-          componentsDir: path.resolve(__dirname, 'components'),
-          componentsPatterns: ['*.vue', '**/*.vue'],
-        },
-      ],
+      palettePlugin({
+        preset: 'sass',
+        userStyleFile: path.resolve(__dirname, 'styles', 'index.scss'),
+        userPaletteFile: path.resolve(__dirname, 'styles', 'palette.scss'),
+      }),
+      registerComponentsPlugin({
+        componentsDir: path.resolve(__dirname, './components'),
+        componentsPatterns: ['*.vue', '**/*.vue'],
+      }),
     ],
     async onInitialized(app) {
       // Error if we dont have an API key set

@@ -1,18 +1,12 @@
 const {path} = require('@vuepress/utils');
 
+const customTheme = require(path.resolve(__dirname, 'theme'));
+
 module.exports = {
   base: '/events/',
   title: 'Lando',
   description: 'A list of liberating events and meetups.',
-  bundlerConfig: {
-    viteOptions: {
-      optimizeDeps: {
-        include: [path.resolve(__dirname, 'theme', 'utils.js')],
-      },
-    },
-  },
-  theme: path.resolve(__dirname, 'theme'),
-  themeConfig: {
+  theme: customTheme({
     // PARENT CONFIG
     contributors: false,
     darkMode: true,
@@ -118,7 +112,7 @@ module.exports = {
     tags: false,
     toc: true,
     versionsPage: false,
-  },
+  }),
   head: [
     ['link', {rel: 'preconnect', href: '//fonts.googleapis.com'}],
     ['link', {rel: 'preconnect', href: '//fonts.gstatic.com', crossorigin: true}],
