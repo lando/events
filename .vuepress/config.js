@@ -1,5 +1,4 @@
 const {path} = require('@vuepress/utils');
-const {viteBundler} = require('@vuepress/bundler-vite');
 
 const customTheme = require(path.resolve(__dirname, 'theme'));
 
