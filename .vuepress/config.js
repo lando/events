@@ -7,13 +7,6 @@ module.exports = {
   base: '/events/',
   title: 'Lando',
   description: 'A list of liberating events and meetups.',
-  bundler: viteBundler({
-    viteOptions: {
-      optimizeDeps: {
-        include: [path.resolve(__dirname, 'theme', 'utils.js')],
-      },
-    },
-  }),
   theme: customTheme({
     // PARENT CONFIG
     contributors: false,

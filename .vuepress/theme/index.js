@@ -3,7 +3,6 @@ const dayjs = require('dayjs');
 const advancedFormat = require('dayjs/plugin/advancedFormat');
 const debug = require('debug')('@lando/theme-events');
 const {error, fs, path, warn} = require('@vuepress/utils');
-const {getMarker} = require('./utils.js');
 const yaml = require('js-yaml');
 
 const NodeGeocoder = require('node-geocoder');
@@ -13,8 +12,25 @@ const parentTheme = require('@lando/vuepress-theme-default-plus');
 const {palettePlugin} = require('@vuepress/plugin-palette');
 const {registerComponentsPlugin} = require('@vuepress/plugin-register-components');
 
-
 module.exports = options => {
+  const activeMarkerColor = '#ed3f7a';
+  const markerColor = '#49424E';
+
+  const getMarker = (lat, lng, options = {}) => ({
+    icon: {
+      anchor: {x: 0, y: 0},
+      path: 'M0,10a10,10 0 1,0 20,0a10,10 0 1,0 -20,0',
+      scale: 1,
+      fillColor: options.active ? activeMarkerColor : markerColor,
+      fillOpacity: 1,
+      strokeColor: options.active ? activeMarkerColor : markerColor,
+      strokeOpacity: 1,
+    },
+    position: {lat, lng},
+    visible: options.show !== false,
+    zIndex: options.weight || 0,
+  });
+
   return {
     name: '@lando/events-theme',
     extends: parentTheme(options),
