@@ -8,8 +8,9 @@ module.exports = {
   description: 'A list of liberating events and meetups.',
   theme: customTheme({
     // PARENT CONFIG
+    colorMode: 'auto',
+    colorModeSwitch: true,
     contributors: false,
-    darkMode: true,
     docsDir: '.',
     docsBranch: 'main',
     editLink: false,
