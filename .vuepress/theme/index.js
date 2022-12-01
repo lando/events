@@ -1,18 +1,25 @@
-const _ = require('lodash');
-const dayjs = require('dayjs');
-const advancedFormat = require('dayjs/plugin/advancedFormat');
-const debug = require('debug')('@lando/theme-events');
-const {error, fs, path, warn} = require('@vuepress/utils');
-const yaml = require('js-yaml');
+// mods
+import _ from 'lodash';
+import advancedFormat from 'dayjs/plugin/advancedFormat.js';
+import dayjs from 'dayjs';
+import Debug from 'debug';
+import NodeGeocoder from 'node-geocoder';
+import yaml from 'js-yaml';
 
-const NodeGeocoder = require('node-geocoder');
+// vuepress things
+import {error, fs, getDirname, path, warn} from '@vuepress/utils';
+
+// plugins/themes
+import {defaultThemePlus} from '@lando/vuepress-theme-default-plus';
+import {palettePlugin} from '@vuepress/plugin-palette';
+import {registerComponentsPlugin} from '@vuepress/plugin-register-components';
+
+const __dirname = getDirname(import.meta.url);
+const debug = Debug('@lando/theme-events'); // eslint-disable-line
+
 dayjs.extend(advancedFormat);
 
-const parentTheme = require('@lando/vuepress-theme-default-plus');
-const {palettePlugin} = require('@vuepress/plugin-palette');
-const {registerComponentsPlugin} = require('@vuepress/plugin-register-components');
-
-module.exports = options => {
+export const eventTheme = options => {
   const activeMarkerColor = '#ed3f7a';
   const markerColor = '#49424E';
 
@@ -33,14 +40,14 @@ module.exports = options => {
 
   return {
     name: '@lando/events-theme',
-    extends: parentTheme(options),
+    extends: defaultThemePlus(options),
     alias: {
       '@theme/EventCard.vue': path.resolve(__dirname, 'components', 'EventCard.vue'),
       '@theme/Home.vue': path.resolve(__dirname, 'components', 'Home.vue'),
       '@theme/Map.vue': path.resolve(__dirname, 'components', 'Map.vue'),
       '@theme/Navbar.vue': path.resolve(__dirname, 'components', 'NavbarCustom.vue'),
     },
-    layouts: path.resolve(__dirname, 'layouts'),
+    clientConfigFile: path.resolve(__dirname, 'client.js'),
     plugins: [
       palettePlugin({
         preset: 'sass',
