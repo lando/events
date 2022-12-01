@@ -1,12 +1,11 @@
-const {path} = require('@vuepress/utils');
+import {defineUserConfig} from '@vuepress/cli';
+import {eventTheme} from './theme/index.js';
 
-const customTheme = require(path.resolve(__dirname, 'theme'));
-
-module.exports = {
+export default defineUserConfig({
   base: '/events/',
   title: 'Lando',
   description: 'A list of liberating events and meetups.',
-  theme: customTheme({
+  theme: eventTheme({
     // PARENT CONFIG
     colorMode: 'auto',
     colorModeSwitch: true,
@@ -126,4 +125,4 @@ module.exports = {
     ['meta', {name: 'msapplication-TileColor', content: '#DD3F8F'}],
     ['meta', {name: 'theme-color', content: '#ffffff'}],
   ],
-};
+});

@@ -66,7 +66,7 @@
 import {computed, defineAsyncComponent, onMounted, reactive, ref} from 'vue';
 import {useRouter} from 'vue-router';
 import {useSiteData} from '@vuepress/client';
-import {useThemeData} from '@vuepress/plugin-theme-data/lib/client';
+import {useThemeData} from '@vuepress/plugin-theme-data/client';
 
 import SocialLinks from '@lando/vuepress-theme-default-plus/components/SocialLinks.vue';
 import EventCard from '@theme/EventCard.vue';

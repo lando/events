@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import {useThemeData} from '@vuepress/plugin-theme-data/lib/client';
+import {useThemeData} from '@vuepress/plugin-theme-data/client';
 import SocialLinks from '@lando/vuepress-theme-default-plus/components/SocialLinks.vue';
 
 // Social
