@@ -19,7 +19,6 @@ export default defineUserConfig({
     logo: '/images/logo.png',
     logoDark: '/images/logo-white.png',
     repo: 'lando/events',
-    sidebar: [],
 
     // THEME CONFIG
     baseUrl: 'https://lando.dev',
