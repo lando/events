@@ -1,3 +1,22 @@
+- id: 39a792bf3ace6986080333fababace8720fc508b
+  title: Automation for Developers: An Introduction to Lando and Cypress
+  presenters:
+    - name: Erik Hanson
+      pic: 'https://gravatar.com/avatar/fab5debb56bfa54ce23d7cba955432c2'
+      link: 'https://x.com/erik_hanson'
+  date: '2024-10-10'
+  time: 1728573010000
+  type: conference
+  location: New York, NY
+  url: 'https://youtu.be/_LszQQFhzJU?si=RakIVsFi6oKYaD77'
+  summary: |
+    Developers who need to quickly move between projects, or just want a simpler 
+    way to set up and develop for Magento, can utilize Lando and Cypress in 
+    their work. The Lando tools are great for repeatable container and 
+    environment setup, and Cypress can make end-to-end functional testing as 
+    easy as writing a macro or business test. This presentation is from Meet 
+    Magento NYC 2024.
+
 - id: 27ffaa28e7a1c6228754e2053c9e9488b0f747b0
   title: Deploy to Mars with Lando
   presenters:
