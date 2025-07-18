@@ -48,7 +48,7 @@
       </div>
 
       <div class="footer">
-        <div class="copyright">copyright © 2022 Lando System</div>
+        <div class="copyright">copyright ©2025 Lando Alliance</div>
         <SocialLinks
           v-if="social"
           :icons="social"
