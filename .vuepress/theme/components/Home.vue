@@ -54,8 +54,8 @@
           :icons="social"
         />
         <div class="policies">
-          <a href="privacy/">privacy policy</a> |
-          <a href="terms/">terms of use</a>
+          <a href="https://lando.dev/privacy/">privacy policy</a> |
+          <a href="https://lando.dev/terms/">terms of use</a>
         </div>
       </div>
     </div>
