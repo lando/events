@@ -7,7 +7,8 @@
     <span class="copyright">copyright © 2025 Lando Alliance </span>
     <span class="policies">
       <a href="privacy/">privacy policy</a> |
-      <a href="terms/">terms of use</a>
+      <a href="terms/">terms of use</a> |
+      <a href="coc/">code of coduct</a>
     </span>
   </footer>
 </template>
