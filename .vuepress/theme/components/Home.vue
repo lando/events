@@ -56,6 +56,7 @@
         <div class="policies">
           <a href="https://lando.dev/privacy/">privacy policy</a> |
           <a href="https://lando.dev/terms/">terms of use</a>
+          <a href="https://lando.dev/coc/">code of conduct</a>
         </div>
       </div>
     </div>
