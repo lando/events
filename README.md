@@ -14,10 +14,9 @@ We try to log all changes big and small in both [THE CHANGELOG](https://github.c
 
 ## Development
 
-* Requires [Node 14+](https://nodejs.org/dist/latest-v14.x/)
+* Requires [Node 20+](https://nodejs.org/dist/latest-v14.x/)
 * Requires a [Google Maps API key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 * Note that the events data lives in `events.yaml` and you must relaunch the dev server or rebuild the app for changes to reflect.
-* Prefers [Yarn](https://classic.yarnpkg.com/lang/en/docs/install)
 * Alternatively you can also use Lando
 
 ```bash
@@ -28,16 +27,16 @@ git clone https://github.com/lando/blog.git && cd blog
 
 ```bash
 # Install deps
-yarn | npm install
+npm install
 
 # Launch dev site
-DEBUG="@lando/*" VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY yarn dev
+DEBUG="@lando/*" VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY npm run dev
 
 # Lint
-yarn lint
+npm run lint
 
 # Build site
-DEBUG="@lando/*" VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY yarn build
+DEBUG="@lando/*" VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY npm run build
 ```
 
 ### Using Lando
@@ -50,16 +49,10 @@ lando start
 VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY lando dev
 
 # Lint
-lando yarn lint
+lando npm run  lint
 
 # Build site
-VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY lando yarn build
-```
-
-## Releasing
-
-```bash
-yarn release
+VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY lando npm run build
 ```
 
 ## Contributors

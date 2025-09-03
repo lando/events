@@ -48,7 +48,9 @@
       </div>
 
       <div class="footer">
-        <div class="copyright">copyright ©2025 Lando Alliance</div>
+        <div class="copyright">© 2025 Lando Alliance
+          <a target="_blank" href="https://drive.google.com/file/d/1Gms46fU-PKHnze49cKE-sCIxJWv7SeiF/view">a 501(c)(3) org</a>
+        </div>
         <SocialLinks
           v-if="social"
           :icons="social"
