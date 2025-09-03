@@ -29,7 +29,9 @@ jobs:
         run: npm clean-install --prefer-offline --frozen-lockfile
       - name: Lint code
         run: npm run lint
-      - name: Run unit tests
+      - name: Run build tests
+        env:
+          VITE_GMAPS_API_KEY: ${{ secrets.VITE_GMAPS_API_KEY }}
         run: npm run build
       - name: Export formatted release date
         run: echo "RELEASE_DATE=$(date -d "${{ github.event.release.published_at }}" "+%B %e, %Y" | tr -s ' ')" >> $GITHUB_ENV
