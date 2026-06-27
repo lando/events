@@ -131,6 +131,9 @@ const getCssValue = (el, property) => {
     .logo {
       margin-right: 3.8125rem;
     }
+    .navbar-items a{
+      font-size: 16px;
+    }
     .navbar-interior {
       width: var(--total-width);
       margin: auto;
@@ -141,12 +144,6 @@ const getCssValue = (el, property) => {
         margin-left: 3rem;
         position: static;
         flex-grow: 1;
-        // Should probably make our own navbar-links and do this there.
-        .navbar-items {
-          .navbar-item {
-            font-size: 1rem;
-          }
-        }
       }
       .navbar-links-right-wrapper {
         justify-content: flex-end;
@@ -183,6 +180,8 @@ const getCssValue = (el, property) => {
   .sidebar {
     top: 0 !important;
   }
+
+
   .navbar-item > a:hover {
     border-bottom: 0 !important;
     margin-bottom: 0 !important;
