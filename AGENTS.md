@@ -25,3 +25,9 @@
 - Treat the public site as a seamless experience split across multiple Netlify projects. Shared navbar links in `.vuepress/config.js` should use absolute production URLs such as `https://www.lando.dev/mission`, not root-relative links.
 - Keep donation and sponsorship links pointed directly at `https://github.com/sponsors/lando`. The `/donate` redirect exists for convenience, but public donation CTAs should use the GitHub Sponsors URL directly.
 - External Docs and GitHub CTA links should use `target="_blank"` with `rel="noopener noreferrer"`.
+
+## LLM Metadata
+
+- Keep public LLM metadata files such as `.vuepress/public/llms.txt` and `.vuepress/public/llms-full.txt` as static public assets, not VuePress Markdown pages.
+- Review and update those files when public content, canonical URLs, navigation, source-file locations, or `events.yaml` semantics change.
+- Do not publish this repository's `AGENTS.md` as a VuePress page; it is local coding-agent guidance.

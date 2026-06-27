@@ -5,6 +5,12 @@ export default defineUserConfig({
   base: '/events/',
   title: 'Lando',
   description: 'A list of liberating events and meetups.',
+  pagePatterns: [
+    '**/*.md',
+    '!.vuepress',
+    '!node_modules',
+    '!**/AGENTS.md',
+  ],
   theme: eventTheme({
     // PARENT CONFIG
     colorMode: 'auto',

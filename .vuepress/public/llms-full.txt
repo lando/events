@@ -1,0 +1,60 @@
+# Lando Events: Full LLM Context
+
+## Site Summary
+
+Lando Events is the events subsite for Lando Alliance. It lists community events, meetups, talks, camps, conferences, and learning opportunities related to Lando and adjacent developer workflows.
+
+Canonical production URL: https://www.lando.dev/events/
+
+The site is part of a multi-project Lando web presence. Shared navigation links should be treated as production URLs on `www.lando.dev` or `docs.lando.dev`, not as relative paths within this repository.
+
+## Public Routes
+
+- https://www.lando.dev/events/ - events landing page and event listing.
+- https://www.lando.dev/events/CHANGELOG.html - release history for the events subsite.
+- https://www.lando.dev/events/llms.txt - concise LLM discovery file.
+- https://www.lando.dev/events/llms-full.txt - expanded LLM context file.
+- https://www.lando.dev/events/sitemap.xml - generated sitemap.
+- https://www.lando.dev/events/robots.txt - generated crawler policy.
+
+## Content Model
+
+The event list is sourced from `events.yaml` in the repository root. Event records generally include:
+
+- `id`: stable event identifier.
+- `title`: event or talk title.
+- `presenters`: one or more presenters with `name`, optional `pic`, and optional `link`.
+- `date`: event date.
+- `time`: timestamp used for sorting and map weighting.
+- `type`: event category such as `conference`, `camp`, or `meetup`.
+- `location`: location string that the build attempts to geocode.
+- `url`: event, recording, or external reference URL.
+- `summary`: short public description.
+
+The VuePress theme loads `events.yaml`, computes anchors and timestamps, sorts events newest first, and attempts to geocode event locations with `VITE_GMAPS_API_KEY`.
+
+## Source Repository
+
+- Repository: https://github.com/lando/events
+- Event data: https://github.com/lando/events/blob/main/events.yaml
+- Main page source: https://github.com/lando/events/blob/main/index.md
+- Changelog source: https://github.com/lando/events/blob/main/CHANGELOG.md
+
+## Related Lando URLs
+
+- Main site: https://www.lando.dev/
+- Mission: https://www.lando.dev/mission
+- Blog: https://www.lando.dev/blog
+- Events: https://www.lando.dev/events
+- Support: https://www.lando.dev/support
+- Documentation: https://docs.lando.dev
+- GitHub organization: https://github.com/lando
+- Sponsorship: https://github.com/sponsors/lando
+
+## Agent Guidance
+
+When answering questions about this site, prefer production URLs for public references and repository URLs for implementation details.
+
+Do not treat `AGENTS.md` as public site content. It is local repository guidance for coding agents and is intentionally excluded from VuePress page generation.
+
+Because these LLM metadata files are static, they should be refreshed whenever public navigation, canonical production URLs, important source files, or event data semantics change.

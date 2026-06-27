@@ -1,0 +1,29 @@
+# Lando Events
+
+> Community events, meetups, talks, and learning opportunities from Lando Alliance.
+
+The canonical production URL for this site is https://www.lando.dev/events/.
+
+## Primary Content
+
+- [Events](https://www.lando.dev/events/): Lando community events and presentations.
+- [Full LLM Context](https://www.lando.dev/events/llms-full.txt): expanded machine-readable context for this site.
+- [Changelog](https://www.lando.dev/events/CHANGELOG.html): release history for the events site.
+- [Source Repository](https://github.com/lando/events): source code and event data for this subsite.
+- [Event Data](https://github.com/lando/events/blob/main/events.yaml): YAML source for event records.
+
+## Related Lando Resources
+
+- [Lando](https://www.lando.dev/): main Lando website.
+- [Lando Mission](https://www.lando.dev/mission): organizational mission and background.
+- [Lando Blog](https://www.lando.dev/blog): articles and updates.
+- [Lando Support](https://www.lando.dev/support): support resources.
+- [Lando Docs](https://docs.lando.dev): technical documentation.
+- [GitHub Sponsors](https://github.com/sponsors/lando): direct sponsorship link.
+
+## Notes For Agents
+
+This site is a VuePress-powered subsite whose public path is `/events/`.
+The event list is generated from `events.yaml`.
+Use the production URLs above when citing public content.
+Treat this file and `llms-full.txt` as static metadata that should be reviewed when site content, navigation, canonical URLs, or event data semantics change.
