@@ -1,10 +1,10 @@
 # Lando Events
 
-This repo powers the [Lando events subsite](https://lando.dev/events).
+This repo powers the [Lando events subsite](https://www.lando.dev/events).
 
 ## Issues, Questions and Support
 
-If you have a question or would like some community support we recommend you [join us on Slack](https://launchpass.com/devwithlando). Note that this is the Slack community for [Lando](https://lando.dev) but we are more than happy to help with this module as well!
+If you have a question or would like some community support we recommend you [join us on Slack](https://launchpass.com/devwithlando). Note that this is the Slack community for [Lando](https://www.lando.dev) but we are more than happy to help with this module as well!
 
 If you'd like to report a bug or submit a feature request then please [use the issue queue](https://github.com/lando/events/issues/new/choose) in this repo.
 
@@ -14,7 +14,7 @@ We try to log all changes big and small in both [THE CHANGELOG](https://github.c
 
 ## Development
 
-* Requires [Node 20+](https://nodejs.org/dist/latest-v14.x/)
+* Requires [Node 24](https://nodejs.org/)
 * Requires a [Google Maps API key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 * Note that the events data lives in `events.yaml` and you must relaunch the dev server or rebuild the app for changes to reflect.
 * Alternatively you can also use Lando
@@ -27,7 +27,7 @@ git clone https://github.com/lando/blog.git && cd blog
 
 ```bash
 # Install deps
-npm install
+npm clean-install --prefer-offline --frozen-lockfile
 
 # Launch dev site
 DEBUG="@lando/*" VITE_GMAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY npm run dev
@@ -69,4 +69,3 @@ Made with [contributors-img](https://contrib.rocks).
 * [TERMS OF USE](https://docs.lando.dev/terms)
 * [PRIVACY POLICY](https://docs.lando.dev/privacy)
 * [CODE OF CONDUCT](https://docs.lando.dev/coc)
-

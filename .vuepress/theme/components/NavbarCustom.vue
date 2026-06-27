@@ -17,7 +17,15 @@
       </div>
 
       <div class="navbar-links-right-wrapper" :style="linksWrapperStyle">
-        <a href="https://lando.dev/download/" class="btn btn-primary can-hide">Get Lando!</a>
+        <a
+          href="https://github.com/sponsors/lando"
+          class="donate btn btn-primary has-heart can-hide"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <DonateHeart />
+          Donate
+        </a>
         <ToggleSidebarButtonCustom @toggle="$emit('toggle-sidebar')" />
       </div>
     </div>
@@ -28,6 +36,7 @@
 import {useRouteLocale, useSiteLocaleData, withBase, ClientOnly} from '@vuepress/client';
 import {computed, onMounted, ref, h} from 'vue';
 import {useThemeLocaleData} from '@vuepress/theme-default/client';
+import DonateHeart from './DonateHeart.vue';
 import NavbarItems from '@vuepress/theme-default/components/NavbarItems.vue';
 import ToggleSidebarButtonCustom from './ToggleSidebarButtonCustom.vue';
 
@@ -58,7 +67,7 @@ const linksWrapperStyle = computed(() => {
 onMounted(() => {
   // TODO: migrate to css var
   // refer to _variables.scss
-  const MOBILE_DESKTOP_BREAKPOINT = 719;
+  const MOBILE_DESKTOP_BREAKPOINT = 1024;
   const navbarHorizontalPadding =
     getCssValue(navbar.value, 'paddingLeft') +
     getCssValue(navbar.value, 'paddingRight');
@@ -157,7 +166,30 @@ const getCssValue = (el, property) => {
 @media (max-width: $MQNarrow) {
   .navbar {
     padding: 2rem;
+    padding-left: 2rem !important;
+    .can-hide,
+    .navbar-links-wrapper {
+      display: none;
+    }
+    .navbar-interior {
+      .toggle-sidebar-button {
+        display: block;
+      }
+    }
   }
+  .donate {
+    display: none !important;
+  }
+  .sidebar {
+    top: 0 !important;
+  }
+  .navbar-item > a:hover {
+    border-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    color: var(--c-text-accent) !important;
+  }
+
+
 }
 
 @media (max-width: $MQMobileNarrow) {

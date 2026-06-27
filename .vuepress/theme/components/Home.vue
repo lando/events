@@ -48,7 +48,7 @@
       </div>
 
       <div class="footer">
-        <div class="copyright">© 2025 Lando Alliance
+        <div class="copyright">© 2026 Lando Alliance
           <a target="_blank" href="https://drive.google.com/file/d/1Gms46fU-PKHnze49cKE-sCIxJWv7SeiF/view">a 501(c)(3) org</a>
         </div>
         <SocialLinks
@@ -56,9 +56,9 @@
           :icons="social"
         />
         <div class="policies">
-          <a href="https://lando.dev/privacy/">privacy policy</a> |
-          <a href="https://lando.dev/terms/">terms of use</a> |
-          <a href="https://lando.dev/coc/">code of conduct</a>
+          <a href="https://www.lando.dev/privacy/">privacy policy</a> |
+          <a href="https://www.lando.dev/terms/">terms of use</a> |
+          <a href="https://www.lando.dev/coc/">code of conduct</a>
         </div>
       </div>
     </div>

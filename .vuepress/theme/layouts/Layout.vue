@@ -2,9 +2,12 @@
   <ParentLayout>
     <template #sidebar-bottom>
       <FooterCta
-        heading="What are you waiting for?"
-        ctaText="Get Lando Now"
-        ctaLink="/download"
+        heading="Support the Lando Alliance"
+        ctaText="Donate"
+        ctaLink="https://github.com/sponsors/lando"
+        ctaTarget="_blank"
+        ctaRel="noopener noreferrer"
+        :showHeart="true"
       />
     </template>
     <template #page-bottom>
@@ -50,7 +53,7 @@ import FooterCta from './../components/FooterCta.vue';
   }
 }
 
-@media (max-width: $MQMobile) {
+@media (max-width: $MQNarrow) {
   .theme-container.sidebar-open {
     overflow: hidden;
     .sidebar {
@@ -62,6 +65,7 @@ import FooterCta from './../components/FooterCta.vue';
       padding-top: calc(var(--navbar-height) + 2.5rem);
       .navbar-items {
         border: none;
+        display: block;
         .navbar-item {
           border-bottom: 1px solid var(--c-border);
           padding: 1.3125rem 0 1.5rem 0rem;

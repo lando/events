@@ -1,6 +1,6 @@
 ---
 title: Events
-description: Documentation for Lando; a free, open source and Docker driven local development and DevOps tool for all your projects that is fast, easy, powerful and liberating.
+description: Community events, meetups, and learning opportunities from Lando Alliance.
 home: true
 pageClass: events-home
 ---
